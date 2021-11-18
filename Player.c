@@ -8,12 +8,12 @@ void createEmptyPlayerList(Player *P)
     (*P).Neff = 0;
 }
 
-void summonPlayer(Player *P, int n)
+void addPlayer(Player *P, int n)
 {
     for (int i = 1; i <= n; i++)
     {
         printf("Masukkan Username:\n");
-        scanf("%s", &((*P).uname[i]));
+        scanf("%s", &((*P).uName[i]));
         (*P).isTelep[i] = FALSE;
         (*P).pos[i] = 1;
         (*P).isImmu[i] = FALSE;
@@ -22,13 +22,13 @@ void summonPlayer(Player *P, int n)
     (*P).Neff = n;
 }
 
-int getIdxOfPlayer(Player P, char *nameSearch)
+int getPlayerIdx(Player P, char *nameSearch)
 {
     int i = IdxMin;
     int idxP = IdxUndef;
     while (i <= IdxMax)
     {
-        if (strcmp(nameSearch, P.uname[i]) != 0)
+        if (strcmp(nameSearch, P.uName[i]) != 0)
         {
             i++;
         }
@@ -41,32 +41,27 @@ int getIdxOfPlayer(Player P, char *nameSearch)
     return idxP;
 }
 
-boolean isEmptyList(Skill pS)
+boolean isPlayerTeleported(Player P, char *uName)
 {
-    return ((ADDR_HEADSKILL(pS)) == Nil);
-}
-
-boolean getTeleportedConditionOfPlayer(Player P, char *uname)
-{
-    int idx = getIdxOfPlayer(P, uname);
+    int idx = getPlayerIdx(P, uName);
     if (idx != IdxUndef)
     {
         return (P.isTelep[idx]);
     }
 }
 
-boolean getImmunityConditionOfPlayer(Player P, char *uname)
+boolean isPlayerImmune(Player P, char *uName)
 {
-    int idx = getIdxOfPlayer(P, uname);
+    int idx = getPlayerIdx(P, uName);
     if (idx != IdxUndef)
     {
         return (P.isImmu[idx]);
     }
 }
 
-int getPositionOfPlayer(Player P, char *uname)
+int getPlayerPosition(Player P, char *uName)
 {
-    int idx = getIdxOfPlayer(P, uname);
+    int idx = getPlayerIdx(P, uName);
     if (idx != IdxUndef)
     {
         return (P.pos[idx]);
