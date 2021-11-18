@@ -1,7 +1,9 @@
-#ifndef _PLAYER_H
-#define _PLAYER_H
+#ifndef PLAYER_H
+#define PLAYER_H
+
 #include "boolean.h"
 #include <stdlib.h>
+
 #define Nil NULL
 
 typedef int ElType;
@@ -24,52 +26,45 @@ typedef address lSkill;
 typedef struct
 {
     int Neff;
-    char uname[IdxMax - IdxMin + 1][16];
+    char uName[IdxMax - IdxMin + 1][16];
     ElType pos[IdxMax - IdxMin + 1];
     boolean isTelep[IdxMax - IdxMin + 1];
     boolean isImmu[IdxMax - IdxMin + 1];
     lSkill Skills[IdxMax - IdxMin + 1];
 } Player;
 
-#define ADDR_HEADSKILL(p) (p).addrFirstSkill
-#define NEXTSKILL(p) (p)->nextskill
-#define SKILLNAME(p) (p)->skillName
-
 void createEmptyPlayerList(Player *P);
 /*
- I.S. array pU sembarang
- F.S. array pU kosong
+ I.S. array P sembarang
+ F.S. array P kosong
 */
-void summonPlayer(Player *P, int n);
+void addPlayer(Player *P, int n);
 /*
- Prosedur untuk membuat list pemain sebanyak n pemain
- I.S array pU, pT, pP, pI kosong
- F.S array pU, pT, pP, pI terisi informasi kondisi awal permainan sebanyak n
-  pU.uname[ indexPlayer ] terisi inputan
+ Prosedur untuk membuat list player sebanyak n pemain
+ I.S array Player.uName, Player.pos, Player.isTelep,
+    Player.isImmu, Player.Skills kosong dan Neff berisi 0
+ F.S array Player.uName, Player.pos, Player.isTelep, Player.isImmu, Player.Skills sebanyak n
+    terisi inputan dan Neff menjadi n
 */
-int getIdxOfPlayer(Player P, char *name);
+int getPlayerIdx(Player P, char *name);
 /*
- Fungsi mereturn index player dalam array pU dengan username parameter input uname
- Jika tidak ditemukan player uname di dalam array pU, maka akan meretrun IdxUndef
+ Fungsi untuk mereturn index player dalam array uName dengan uName sebagai parameter input
+ Apabila input tidak terdapat di list uName, maka akan mereturn IdxUndef
 */
-boolean isEmptyList(Skill pS);
+boolean isPlayerTeleported(Player P, char *uName);
 /*
- Mereturn True jika pS kosong
+ Fungsi untuk mendapatkan informasi mengenai username yang dijadikan parameter
+ mengenai apakah player tersebut terkena portal atau tidak
 */
-boolean getTeleportedConditionOfPlayer(Player P, char *uname);
+boolean isPlayerImmune(Player P, char *uName);
 /*
- Fungsi untuk mendapatkan informasi kondisi pemain dengan username uname, apakah
-sebelumnya terkena portal (teleported) atau tidak
+ Fungsi untuk mendapatkan informasi mengenai username yang dijadikan parameter
+ mengenai apakah player tersebut sedang imun atau tidak
 */
-boolean getImmunityConditionOfPlayer(Player P, char *uname);
+int getPlayerPosition(Player P, char *uName);
 /*
- Fungsi untuk mendapatkan informasi kondisi pemain dengan username uname, apakah
- Sedang imune terhadap efek apapun atau tidak
-*/
-int getPositionOfPlayer(Player P, char *uname);
-/*
- Fungsi untuk mendapatkan informasi posisi terakhir dari pemain dengan username
- uname;
+ Fungsi untuk mendapatkan informasi mengenai username yang dijadikan parameter
+ mengenai posisi player;
 */
 
 #endif
