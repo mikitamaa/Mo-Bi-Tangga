@@ -1,75 +1,74 @@
-#ifndef _PLAYER_H
-#define _PLAYER_H
-#include "boolean.h"
+#include "player.h"
+#include <string.h>
 #include <stdlib.h>
-#define Nil NULL
+#include <stdio.h>
 
-typedef int ElType;
-#define IdxMax 4
-#define IdxMin 1
-#define IdxUndef -999
-
-typedef struct listSkillNode *address;
-typedef struct listSkillNode
+void createEmptyPlayerList(Player *P)
 {
-    char Name[25];
-    int Identifier;
-    /* Setiap jenis skill memiliki identifier tersendiri. */
-    address next;
-} Skill;
+    (*P).Neff = 0;
+}
 
-typedef address lSkill;
-
-/* Player menggunakan array */
-typedef struct
+void summonPlayer(Player *P, int n)
 {
-    int Neff;
-    char uname[IdxMax - IdxMin + 1][16];
-    ElType pos[IdxMax - IdxMin + 1];
-    boolean isTelep[IdxMax - IdxMin + 1];
-    boolean isImmu[IdxMax - IdxMin + 1];
-    lSkill Skills[IdxMax - IdxMin + 1];
-} Player;
+    for (int i = 1; i <= n; i++)
+    {
+        printf("Masukkan Username:\n");
+        scanf("%s", &((*P).uname[i]));
+        (*P).isTelep[i] = FALSE;
+        (*P).pos[i] = 1;
+        (*P).isImmu[i] = FALSE;
+        (*P).Skills[i] = Nil;
+    }
+    (*P).Neff = n;
+}
 
-#define ADDR_HEADSKILL(p) (p).addrFirstSkill
-#define NEXTSKILL(p) (p)->nextskill
-#define SKILLNAME(p) (p)->skillName
+int getIdxOfPlayer(Player P, char *nameSearch)
+{
+    int i = IdxMin;
+    int idxP = IdxUndef;
+    while (i <= IdxMax)
+    {
+        if (strcmp(nameSearch, P.uname[i]) != 0)
+        {
+            i++;
+        }
+        else
+        {
+            idxP = i;
+            break;
+        }
+    }
+    return idxP;
+}
 
-void createEmptyPlayerList(Player *P);
-/*
- I.S. array pU sembarang
- F.S. array pU kosong
-*/
-void summonPlayer(Player *P, int n);
-/*
- Prosedur untuk membuat list pemain sebanyak n pemain
- I.S array pU, pT, pP, pI kosong
- F.S array pU, pT, pP, pI terisi informasi kondisi awal permainan sebanyak n
-  pU.uname[ indexPlayer ] terisi inputan
-*/
-int getIdxOfPlayer(Player P, char *name);
-/*
- Fungsi mereturn index player dalam array pU dengan username parameter input uname
- Jika tidak ditemukan player uname di dalam array pU, maka akan meretrun IdxUndef
-*/
-boolean isEmptyList(Skill pS);
-/*
- Mereturn True jika pS kosong
-*/
-boolean getTeleportedConditionOfPlayer(Player P, char *uname);
-/*
- Fungsi untuk mendapatkan informasi kondisi pemain dengan username uname, apakah
-sebelumnya terkena portal (teleported) atau tidak
-*/
-boolean getImmunityConditionOfPlayer(Player P, char *uname);
-/*
- Fungsi untuk mendapatkan informasi kondisi pemain dengan username uname, apakah
- Sedang imune terhadap efek apapun atau tidak
-*/
-int getPositionOfPlayer(Player P, char *uname);
-/*
- Fungsi untuk mendapatkan informasi posisi terakhir dari pemain dengan username
- uname;
-*/
+boolean isEmptyList(Skill pS)
+{
+    return ((ADDR_HEADSKILL(pS)) == Nil);
+}
 
-#endif
+boolean getTeleportedConditionOfPlayer(Player P, char *uname)
+{
+    int idx = getIdxOfPlayer(P, uname);
+    if (idx != IdxUndef)
+    {
+        return (P.isTelep[idx]);
+    }
+}
+
+boolean getImmunityConditionOfPlayer(Player P, char *uname)
+{
+    int idx = getIdxOfPlayer(P, uname);
+    if (idx != IdxUndef)
+    {
+        return (P.isImmu[idx]);
+    }
+}
+
+int getPositionOfPlayer(Player P, char *uname)
+{
+    int idx = getIdxOfPlayer(P, uname);
+    if (idx != IdxUndef)
+    {
+        return (P.pos[idx]);
+    }
+}
