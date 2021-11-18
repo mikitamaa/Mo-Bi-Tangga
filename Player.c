@@ -1,143 +1,75 @@
-#include "player.h"
+#ifndef _PLAYER_H
+#define _PLAYER_H
+#include "boolean.h"
 #include <stdlib.h>
-#include <stdio.h>
+#define Nil NULL
 
-void createEmptyPlayerList(pUserName *pU)
-{
-    (*pU).Neff = 0;
-}
+typedef int ElType;
+#define IdxMax 4
+#define IdxMin 1
+#define IdxUndef -999
 
-void createEmptyPlayerSkillsList(Skill *S)
+typedef struct listSkillNode *address;
+typedef struct listSkillNode
 {
-    ADDR_HEADSKILL(*S) = Nil;
-}
+    char Name[25];
+    int Identifier;
+    /* Setiap jenis skill memiliki identifier tersendiri. */
+    address next;
+} Skill;
 
-address newSkillNode()
-{
-    lsNode *P = (lsNode *)malloc(sizeof(lsNode));
-    if (P != Nil)
-    {
-        NEXTSKILL(P) = Nil;
-        strcpy(SKILLNAME(P), "kosong");
-        return P;
-    }
-    else
-    {
-        return Nil;
-    }
-}
+typedef address lSkill;
 
-void preparationSkillList(Skill *pS1, Skill *pS2, Skill *pS3, Skill *pS4, int n)
+/* Player menggunakan array */
+typedef struct
 {
-    for (int i = 1; i <= n; i++)
-    {
-        if (i == 1)
-        {
-            createEmptyPlayerSkillsList(pS1);
-        }
-        else if (i == 2)
-        {
-            createEmptyPlayerSkillsList(pS2);
-        }
-        else if (i == 3)
-        {
-            createEmptyPlayerSkillsList(pS3);
-        }
-        else if (i == 4)
-        {
-            createEmptyPlayerSkillsList(pS4);
-        }
-    }
-}
+    int Neff;
+    char uname[IdxMax - IdxMin + 1][16];
+    ElType pos[IdxMax - IdxMin + 1];
+    boolean isTelep[IdxMax - IdxMin + 1];
+    boolean isImmu[IdxMax - IdxMin + 1];
+    lSkill Skills[IdxMax - IdxMin + 1];
+} Player;
 
-void summonPlayer(pUserName *pU, pIsTeleported *pT, pPosition *pP, pIsImune *pI, int n)
-{
-    for (int i = 1; i <= n; i++)
-    {
-        printf("coba masukin uname\n");
-        scanf("%s", &((*pU).uname[i]));
-        (*pT).isTele[i] = FALSE;
-        (*pP).pos[i] = 1;
-        (*pI).isImun[i] = FALSE;
-    }
-    (*pU).Neff = n;
-}
+#define ADDR_HEADSKILL(p) (p).addrFirstSkill
+#define NEXTSKILL(p) (p)->nextskill
+#define SKILLNAME(p) (p)->skillName
 
-int getIdxOfPlayer(pUserName pU, char *name)
-{
-    int i = IdxMin;
-    char temp[16];
-    strcpy(temp, name);
-    while ((strcmp(pU.uname[i], temp) != 0) && (i <= IdxMax))
-    {
-        i++;
-    }
-    if (i <= IdxMax)
-    {
-        return i;
-    }
-    else
-    {
-        return IdxUndef;
-    }
-}
+void createEmptyPlayerList(Player *P);
+/*
+ I.S. array pU sembarang
+ F.S. array pU kosong
+*/
+void summonPlayer(Player *P, int n);
+/*
+ Prosedur untuk membuat list pemain sebanyak n pemain
+ I.S array pU, pT, pP, pI kosong
+ F.S array pU, pT, pP, pI terisi informasi kondisi awal permainan sebanyak n
+  pU.uname[ indexPlayer ] terisi inputan
+*/
+int getIdxOfPlayer(Player P, char *name);
+/*
+ Fungsi mereturn index player dalam array pU dengan username parameter input uname
+ Jika tidak ditemukan player uname di dalam array pU, maka akan meretrun IdxUndef
+*/
+boolean isEmptyList(Skill pS);
+/*
+ Mereturn True jika pS kosong
+*/
+boolean getTeleportedConditionOfPlayer(Player P, char *uname);
+/*
+ Fungsi untuk mendapatkan informasi kondisi pemain dengan username uname, apakah
+sebelumnya terkena portal (teleported) atau tidak
+*/
+boolean getImmunityConditionOfPlayer(Player P, char *uname);
+/*
+ Fungsi untuk mendapatkan informasi kondisi pemain dengan username uname, apakah
+ Sedang imune terhadap efek apapun atau tidak
+*/
+int getPositionOfPlayer(Player P, char *uname);
+/*
+ Fungsi untuk mendapatkan informasi posisi terakhir dari pemain dengan username
+ uname;
+*/
 
-boolean isEmptyList(Skill pS)
-{
-    return ((ADDR_HEADSKILL(pS)) == Nil);
-}
-
-void insertVSkill(Skill *pS, char *skname)
-{
-    if (isEmptyList(*pS))
-    {
-        address P = newSkillNode();
-        strcpy(SKILLNAME(P), skname);
-        NEXTSKILL(P) = Nil;
-        ADDR_HEADSKILL(*pS) = P;
-    }
-    else
-    {
-        address P = ADDR_HEADSKILL(*pS);
-        int count = 1;
-        while ((NEXTSKILL(P) != Nil) && (count <= 10))
-        {
-            count++;
-            P = NEXTSKILL(P);
-        }
-        if (count <= 10)
-        {
-            address X = newSkillNode();
-            strcpy(SKILLNAME(X), skname);
-            NEXTSKILL(X) = Nil;
-            NEXTSKILL(P) = X;
-        }
-    }
-}
-
-boolean getTeleportedConditionOfPlayer(pIsTeleported pT, pUserName pU, char *uname)
-{
-    int idx = getIdxOfPlayer(pU, uname);
-    if (idx != IdxUndef)
-    {
-        return (pT.isTele[idx]);
-    }
-}
-
-boolean getImmunityConditionOfPlayer(pIsImune pI, pUserName pU, char *uname)
-{
-    int idx = getIdxOfPlayer(pU, uname);
-    if (idx != IdxUndef)
-    {
-        return (pI.isImun[idx]);
-    }
-}
-
-int getPositionOfPlayer(pPosition pP, pUserName pU, char *uname)
-{
-    int idx = getIdxOfPlayer(pU, uname);
-    if (idx != IdxUndef)
-    {
-        return (pP.pos[idx]);
-    }
-}
+#endif
