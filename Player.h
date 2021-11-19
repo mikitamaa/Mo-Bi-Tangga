@@ -17,6 +17,7 @@ typedef struct listSkillNode
     char Name[25];
     int Identifier;
     /* Setiap jenis skill memiliki identifier tersendiri. */
+    void (*effect)(int *, int);
     address next;
 } Skill;
 
@@ -30,8 +31,21 @@ typedef struct
     ElType pos[IdxMax - IdxMin + 1];
     boolean isTelep[IdxMax - IdxMin + 1];
     boolean isImmu[IdxMax - IdxMin + 1];
-    lSkill Skills[IdxMax - IdxMin + 1];
+    boolean isSenPem[IdxMax - IdxMin + 1];
+    boolean isSenPeng[IdxMax - IdxMin + 1];
+    boolean isCermin[IdxMax - IdxMin + 1];
+    lSkill skills[IdxMax - IdxMin + 1];
 } Player;
+
+#define uName(P) (P).uName
+#define pos(P) (P).pos
+#define isTelep(P) (P).isTelep
+#define isImmu(P) (P).isImmu
+#define isSenPem(P) (P).isSenPem
+#define isSenPeng(P) (P).isSenPeng
+#define isCermin(P) (P).isCermin
+#define skills(P) (P).skills
+#define Neff(P) (P).Neff
 
 void createEmptyPlayerList(Player *P);
 /*
@@ -42,8 +56,8 @@ void addPlayer(Player *P, int n);
 /*
  Prosedur untuk membuat list player sebanyak n pemain
  I.S array Player.uName, Player.pos, Player.isTelep,
-    Player.isImmu, Player.Skills kosong dan Neff berisi 0
- F.S array Player.uName, Player.pos, Player.isTelep, Player.isImmu, Player.Skills sebanyak n
+    Player.isImmu, Player.skills kosong dan Neff berisi 0
+ F.S array Player.uName, Player.pos, Player.isTelep, Player.isImmu, Player.skills sebanyak n
     terisi inputan dan Neff menjadi n
 */
 int getPlayerIdx(Player P, char *name);
@@ -60,6 +74,22 @@ boolean isPlayerImmune(Player P, char *uName);
 /*
  Fungsi untuk mendapatkan informasi mengenai username yang dijadikan parameter
  mengenai apakah player tersebut sedang imun atau tidak
+*/
+boolean isPlayerSenterPembesar(Player P, char *uName);
+/*
+ Fungsi untuk mendapatkan informasi mengenai username yang dijadikan parameter
+ mengenai apakah player tersebut memakai senter pembesar atau tidak
+*/
+boolean isPlayerSenterPengecil(Player P, char *uName);
+/*
+ Fungsi untuk mendapatkan informasi mengenai username yang dijadikan parameter
+ mengenai apakah player tersebut memakai senter pengecil atau tidak
+
+*/
+boolean isPlayerCerminPengganda(Player P, char *uName);
+/*
+ Fungsi untuk mendapatkan informasi mengenai username yang dijadikan parameter
+ mengenai apakah player tersebut memakai cermin pengganda atau tidak
 */
 int getPlayerPosition(Player P, char *uName);
 /*
