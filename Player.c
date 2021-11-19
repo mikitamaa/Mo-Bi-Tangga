@@ -13,13 +13,16 @@ void addPlayer(Player *P, int n)
     for (int i = 1; i <= n; i++)
     {
         printf("Masukkan Username:\n");
-        scanf("%s", &((*P).uName[i]));
-        (*P).isTelep[i] = FALSE;
-        (*P).pos[i] = 1;
-        (*P).isImmu[i] = FALSE;
-        (*P).Skills[i] = Nil;
+        scanf("%s", &(uName(*P)[i]));
+        pos(*P)[i] = 1;
+        isTelep(*P)[i] = FALSE;
+        isImmu(*P)[i] = FALSE;
+        isSenPem(*P)[i] = FALSE;
+        isSenPeng(*P)[i] = FALSE;
+        isCermin(*P)[i] = FALSE;
+        skills(*P)[i] = Nil;
     }
-    (*P).Neff = n;
+    Neff(*P) = n;
 }
 
 int getPlayerIdx(Player P, char *nameSearch)
@@ -46,7 +49,7 @@ boolean isPlayerTeleported(Player P, char *uName)
     int idx = getPlayerIdx(P, uName);
     if (idx != IdxUndef)
     {
-        return (P.isTelep[idx]);
+        return (isTelep(P)[idx]);
     }
 }
 
@@ -55,7 +58,34 @@ boolean isPlayerImmune(Player P, char *uName)
     int idx = getPlayerIdx(P, uName);
     if (idx != IdxUndef)
     {
-        return (P.isImmu[idx]);
+        return (isImmu(P)[idx]);
+    }
+}
+
+boolean isPlayerSenterPembesar(Player P, char *uName)
+{
+    int idx = getPlayerIdx(P, uName);
+    if (idx != IdxUndef)
+    {
+        return (isSenPem(P)[idx]);
+    }
+}
+
+boolean isPlayerSenterPengecil(Player P, char *uName)
+{
+    int idx = getPlayerIdx(P, uName);
+    if (idx != IdxUndef)
+    {
+        return (isSenPeng(P)[idx]);
+    }
+}
+
+boolean isPlayerCerminPengganda(Player P, char *uName)
+{
+    int idx = getPlayerIdx(P, uName);
+    if (idx != IdxUndef)
+    {
+        return (isCermin(P)[idx]);
     }
 }
 
@@ -64,6 +94,6 @@ int getPlayerPosition(Player P, char *uName)
     int idx = getPlayerIdx(P, uName);
     if (idx != IdxUndef)
     {
-        return (P.pos[idx]);
+        return (pos(P)[idx]);
     }
 }
