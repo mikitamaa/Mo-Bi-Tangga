@@ -19,7 +19,14 @@ typedef struct {
 } MAP;
 
 int ArrayOfCharToInt (Kata CKata, int *result) ;
-
+/* 
+Fungsi untuk membaca Array of Character dari mesin karakter
+dan mengubahnya menjadi type integer
+*/
 void KonfigurasiToMap (MAP *Map) ;
-
+/*
+I.S Konfigurasi yang sudah terdefinisi
+F.S Seluruh konfigurasi game dipindahkan ke MAP
+    (PanjangMap, MaxRoll, JumlahTeleporter,)
+*/
 #endif
