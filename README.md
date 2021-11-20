@@ -10,8 +10,8 @@ Kelompok ini terdiri dari :
 - 18220110 - Muhammad Rizki Pratama
 
 ## Table of Contents
-* [General Info](#general-information)
-* [Technologies Used](#technologies-used)
+* [Informasi Umum](#informasi-umum)
+* [Teknologi yang Digunakan](#teknologi-yang-digunakan)
 * [Features](#features)
 * [Screenshots](#screenshots)
 
@@ -21,7 +21,7 @@ Kelompok ini terdiri dari :
 <!-- You don't have to answer all the questions - just the ones relevant to your project. -->
 
 
-## Technologies Used
+## Teknologi yang Digunakan
 
 
 ## Features
