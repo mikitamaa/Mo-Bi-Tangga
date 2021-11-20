@@ -1,6 +1,13 @@
 # MOGITANGGA
-> Tugas Besar IF2111 Algoritma dan Struktur Data
-> MOBITANGGA : Sebuah program kawin silang antara ular tangga dan Yu-Gi-Oh!
+Tugas Besar IF2111 Algoritma dan Struktur Data
+MOBITANGGA : Sebuah program kawin silang antara ular tangga dan Yu-Gi-Oh!
+
+Kelompok ini terdiri dari :
+- 18220013 - Muhammad Rey Shazni Helmi
+- 18220044 - Ammar Raihan
+- 18220103 - Brandon Jonathan Latif
+- 18220108 - Muhammad Furqan Alfuady
+- 18220110 - Muhammad Rizki Pratama
 
 ## Table of Contents
 * [General Info](#general-information)
@@ -16,7 +23,7 @@
 <!-- * [License](#license) -->
 
 
-## General Information
+## Informasi Umum
 - Provide general information about your project here.
 - What problem does it (intend to) solve?
 - What is the purpose of your project?
