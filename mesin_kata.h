@@ -25,6 +25,8 @@ void SalinKata();
           
 void STARTKATA();
 
+void STARTKATACOMMAND();
+
 void ADVKATA();
 
 #endif

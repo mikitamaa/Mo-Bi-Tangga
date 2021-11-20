@@ -30,6 +30,14 @@ void STARTKATA() {
     }
 }
 
+void STARTKATACOMMAND() {
+    STARTCOMMAND() ;
+    IgnoreBlank() ;
+    if ((CC != BLANK) && (CC != NEWLINE) && (!EOP)) {
+        SalinKata() ;
+    }
+}
+
 void ADVKATA(){
     IgnoreBlank() ;
     if ((CC != BLANK) && (CC != NEWLINE) && (!EOP)) {

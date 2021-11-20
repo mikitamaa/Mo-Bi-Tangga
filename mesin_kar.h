@@ -15,4 +15,6 @@ void START();
 
 void ADV();
 
+void STARTCOMMAND();
+
 #endif
