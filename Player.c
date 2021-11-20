@@ -20,7 +20,6 @@ void addPlayer(Player *P, int n)
         isSenPem(*P)[i] = FALSE;
         isSenPeng(*P)[i] = FALSE;
         isCermin(*P)[i] = FALSE;
-        maxRoll(*P)[i] = 6;
         skills(*P)[i] = Nil;
     }
     Neff(*P) = n;
@@ -93,15 +92,6 @@ boolean isPlayerCerminPengganda(Player P, char *uName)
 int getPlayerPosition(Player P, char *uName)
 {
     int idx = getPlayerIdx(P, uName);
-    if (idx != IdxUndef)
-    {
-        return (pos(P)[idx]);
-    }
-}
-
-int getPlayerPosition(Player P, char *uName)
-{
-    int idx = getPlayerMaxRoll(P, uName);
     if (idx != IdxUndef)
     {
         return (pos(P)[idx]);
