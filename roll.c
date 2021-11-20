@@ -5,7 +5,7 @@
 #include <time.h>
 #include <math.h>
 
-int HasilRoll(MAP Map, Player Player, int i) {
+int HasilRoll(MAP Map, Player P, int i) {
     time_t t ;
     srand((unsigned) time(0)) ;
     
