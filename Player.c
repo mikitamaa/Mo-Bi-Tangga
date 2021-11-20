@@ -20,7 +20,7 @@ void addPlayer(Player *P, int n)
         isSenPem(*P)[i] = FALSE;
         isSenPeng(*P)[i] = FALSE;
         isCermin(*P)[i] = FALSE;
-        maxRoll(*P)[i] = 0;
+        maxRoll(*P)[i] = 6;
         skills(*P)[i] = Nil;
     }
     Neff(*P) = n;
