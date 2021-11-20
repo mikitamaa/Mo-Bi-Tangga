@@ -34,7 +34,6 @@ typedef struct
     boolean isSenPem[IdxMax - IdxMin + 1];
     boolean isSenPeng[IdxMax - IdxMin + 1];
     boolean isCermin[IdxMax - IdxMin + 1];
-    int maxRoll[IdxMax - IdxMin + 1];
     lSkill skills[IdxMax - IdxMin + 1];
 } Player;
 
@@ -45,7 +44,6 @@ typedef struct
 #define isSenPem(P) (P).isSenPem
 #define isSenPeng(P) (P).isSenPeng
 #define isCermin(P) (P).isCermin
-#define maxRoll(P) (P).maxRoll
 #define skills(P) (P).skills
 #define Neff(P) (P).Neff
 
@@ -97,10 +95,5 @@ int getPlayerPosition(Player P, char *uName);
 /*
  Fungsi untuk mendapatkan informasi mengenai username yang dijadikan parameter
  mengenai posisi player;
-*/
-int getPlayerMaxRoll(Player P, char *uName);
-/*
- Fungsi untuk mendapatkan informasi mengenai username yang dijadikan parameter
- mengenai max roll player;
 */
 #endif
