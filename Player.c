@@ -15,11 +15,11 @@ void addPlayer(Player *P, int n)
         printf("Masukkan Username:\n");
         scanf("%s", &(uName(*P)[i]));
         pos(*P)[i] = 1;
-        isTelep(*P)[i] = FALSE;
-        isImmu(*P)[i] = FALSE;
-        isSenPem(*P)[i] = FALSE;
-        isSenPeng(*P)[i] = FALSE;
-        isCermin(*P)[i] = FALSE;
+        isTelep(*P)[i] = false;
+        isImmu(*P)[i] = false;
+        isSenPem(*P)[i] = false;
+        isSenPeng(*P)[i] = false;
+        isCermin(*P)[i] = false;
         skills(*P)[i] = Nil;
     }
     Neff(*P) = n;
