@@ -12,10 +12,10 @@ int HasilRoll(MAP Map, Player Player, int i) {
     int MaxRoll = Map.MaxRoll ;
     int MinRoll = 1 ;
 
-    if (Player.IsSenPem[i]) {
+    if (isSenPem(P)[i]) {
         return (rand() % (MaxRoll - floor(MaxRoll/2) + 1) + floor(MaxRoll/2)) ;
     }
-    else if (Player.IsSenPeng[i]) {
+    else if (isSenPeng(P)[i]) {
         return (rand() % floor(MaxRoll/2) + 1) ;
     }
     else {
