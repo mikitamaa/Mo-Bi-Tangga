@@ -1,4 +1,4 @@
-# MOGITANGGA
+# MOBITANGGA
 Tugas Besar IF2111 Algoritma dan Struktur Data.<br />
 MOBITANGGA : Sebuah program kawin silang antara ular tangga dan Yu-Gi-Oh!
 
