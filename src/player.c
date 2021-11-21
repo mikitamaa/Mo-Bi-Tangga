@@ -12,7 +12,7 @@ void addPlayer(Player *P, int n)
 {
     for (int i = 1; i <= n; i++)
     {
-        printf("Masukkan Username:\n");
+        printf("Masukkan Username pemain %d: ", i);
         scanf("%s", &(uName(*P)[i]));
         int j = 1;
         while (j <= n)
@@ -20,7 +20,7 @@ void addPlayer(Player *P, int n)
             if (strcmp(uName(*P)[i], uName(*P)[j]) == 0 && j != i)
             {
                 printf("Username %s sudah digunakan player lain!\n", uName(*P)[i]);
-                printf("Masukkan Username lain:\n");
+                printf("Masukkan Username lain untuk pemain %d: ", i);
                 scanf("%s", &(uName(*P)[i]));
             }
             else
@@ -34,6 +34,7 @@ void addPlayer(Player *P, int n)
         isSenPem(*P)[i] = false;
         isSenPeng(*P)[i] = false;
         isCermin(*P)[i] = false;
+        isUdahRoll(*P)[i] = false;
         skills(*P)[i] = Nil;
     }
     Neff(*P) = n;

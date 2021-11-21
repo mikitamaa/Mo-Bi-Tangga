@@ -7,7 +7,7 @@
 #define Nil NULL
 
 typedef int ElType;
-#define IdxMax 4
+#define IdxMax 5
 #define IdxMin 1
 #define IdxUndef -999
 
@@ -25,6 +25,7 @@ typedef struct
     boolean isSenPem[IdxMax - IdxMin + 1];
     boolean isSenPeng[IdxMax - IdxMin + 1];
     boolean isCermin[IdxMax - IdxMin + 1];
+    boolean isUdahRoll[IdxMax - IdxMin + 1];
     lSkill skills[IdxMax - IdxMin + 1];
 } Player;
 
@@ -48,6 +49,7 @@ typedef struct listSkillNode
 #define isSenPem(P) (P).isSenPem
 #define isSenPeng(P) (P).isSenPeng
 #define isCermin(P) (P).isCermin
+#define isUdahRoll(P) (P).isUdahRoll
 #define skills(P) (P).skills
 #define Neff(P) (P).Neff
 
