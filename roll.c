@@ -13,10 +13,10 @@ int HasilRoll(MAP Map, Player P, int i) {
     int MinRoll = 1 ;
 
     if (isSenPem(P)[i]) {
-        return (rand() % (MaxRoll - floor(MaxRoll/2) + 1) + floor(MaxRoll/2)) ;
+        return (rand() % (MaxRoll - (int)floor(MaxRoll/2) + 1) + (int)floor(MaxRoll/2)) ;
     }
     else if (isSenPeng(P)[i]) {
-        return (rand() % floor(MaxRoll/2) + 1) ;
+        return (rand() % (int)floor(MaxRoll/2) + 1) ;
     }
     else {
         return (rand() % MaxRoll + 1) ;
