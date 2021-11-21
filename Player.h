@@ -33,7 +33,7 @@ typedef struct listSkillNode
     char Name[25];
     int Identifier;
     /* Setiap jenis skill memiliki identifier tersendiri. */
-    void (*effect)(int *, int);
+    void (*effect)(Player *, int);
     address next;
 } Skill;
 
