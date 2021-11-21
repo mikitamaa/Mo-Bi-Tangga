@@ -14,6 +14,20 @@ void addPlayer(Player *P, int n)
     {
         printf("Masukkan Username:\n");
         scanf("%s", &(uName(*P)[i]));
+        int j = 1;
+        while (j <= n)
+        {
+            if (strcmp(uName(*P)[i], uName(*P)[j]) == 0 && j != i)
+            {
+                printf("Username %s sudah digunakan player lain!\n", uName(*P)[i]);
+                printf("Masukkan Username lain:\n");
+                scanf("%s", &(uName(*P)[i]));
+            }
+            else
+            {
+                j++;
+            }
+        }
         pos(*P)[i] = 1;
         isTelep(*P)[i] = false;
         isImmu(*P)[i] = false;
