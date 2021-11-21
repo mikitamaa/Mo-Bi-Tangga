@@ -12,15 +12,6 @@ typedef int ElType;
 #define IdxUndef -999
 
 typedef struct listSkillNode *address;
-typedef struct listSkillNode
-{
-    char Name[25];
-    int Identifier;
-    /* Setiap jenis skill memiliki identifier tersendiri. */
-    void (*effect)(int *, int);
-    address next;
-} Skill;
-
 typedef address lSkill;
 
 /* Player menggunakan array */
@@ -36,6 +27,19 @@ typedef struct
     boolean isCermin[IdxMax - IdxMin + 1];
     lSkill skills[IdxMax - IdxMin + 1];
 } Player;
+
+typedef struct listSkillNode
+{
+    char Name[25];
+    int Identifier;
+    /* Setiap jenis skill memiliki identifier tersendiri. */
+    void (*effect)(int *, int);
+    address next;
+} Skill;
+
+#define Id(P) (P)->Id
+#define Next(P) (P)->next
+#define Effect(P) (P).effect
 
 #define uName(P) (P).uName
 #define pos(P) (P).pos
