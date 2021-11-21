@@ -34,7 +34,7 @@ void KonfigurasiToMap (MAP *Map) {
     ArrayOfCharToInt(CKata, &t) ;
     (*Map).JumlahTeleporter = t ;
 
-    for (int k = 1; k <= (*Map).JumlahTeleporter; k++) {
+    for (int k = 1; k <= (*Map).PanjangMap; k++) {
         (*Map).TabMap[k].Teleporter = -1 ;
     }
 
