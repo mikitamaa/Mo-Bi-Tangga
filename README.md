@@ -1,6 +1,6 @@
 # MOBITANGGA
 Tugas Besar IF2111 Algoritma dan Struktur Data.<br />
-MOBITANGGA : Sebuah program kawin silang antara ular tangga dan Yu-Gi-Oh!
+MOBITANGGA : Sebuah program permainan bertemakan kawin silang antara ular tangga dan Yu-Gi-Oh!
 
 Kelompok ini terdiri dari :
 - 18220013 - Muhammad Rey Shazni Helmi
