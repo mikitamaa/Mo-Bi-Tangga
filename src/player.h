@@ -40,7 +40,7 @@ typedef struct listSkillNode
 
 #define Id(P) (P)->Id
 #define Next(P) (P)->next
-#define Effect(P) (P).effect
+#define Effect(P) (P)->effect
 
 #define uName(P) (P).uName
 #define pos(P) (P).pos
