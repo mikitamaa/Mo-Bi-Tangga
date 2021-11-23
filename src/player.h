@@ -32,10 +32,10 @@ typedef struct
 typedef struct listSkillNode
 {
     char Name[25];
-    int Identifier;
+    int Id;
     /* Setiap jenis skill memiliki identifier tersendiri. */
-    void (*effect)(Player *, int);
     address next;
+    void (*effect)(Player *, int);
 } Skill;
 
 #define Id(P) (P)->Id
