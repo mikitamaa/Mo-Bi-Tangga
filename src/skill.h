@@ -6,13 +6,20 @@
 
 #define Nil NULL
 
+address newSkillNode();
+// Mengembalikan alamat hasil Alokasi Skill
 void CreateEmpty(lSkill *ls);
 /* I.S: *ls sembarang
    F.S: *ls = Nil */
-void draw(Player *P, int currentPlayer);
-// Menambahkan 1 Skill secara random ke lSkill Player yang sedang bermain di giliran ini.
 void insertSkill (lSkill *lS, address S);
 // Menambahkan Skill dengan alamat S ke lSkill
+address Search (lSkill *ls, int skillOrder);
+/* Mencari apakah ada elemen list dengan urutan = skillOrder pada ls */
+/* Jika ada, mengirimkan address elemen tersebut. */
+/* Jika tidak ada, mengirimkan Nil */
+void constructSkill(address S, int id);
+void draw(Player *P, int currentPlayer);
+// Menambahkan 1 Skill secara random ke lSkill Player yang sedang bermain di giliran ini.
 void discard(lSkill *ls, int skillOrder);
 // Membuang Skill dengan nomor urut skillOrder dari lSkill suatu pemain.
 void pintuGKM(Player *P, int currentPlayer);
