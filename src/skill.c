@@ -83,54 +83,46 @@ address Search (lSkill *ls, int skillOrder) {
     
 }
 
-void swap (int *a, int *b)
-{
-    int temp = *a;
-    *a = *b;
-    *b = temp;
-}
-
-void randomize ( int arr[], int n )
+int randomize(int X)
 {
     // seed untuk randomizer
     srand ( time(NULL) );
- 
-    // Start from the last element and swap one by one. We don't
-    // need to run for the first element that's why i > 0
-    for (int i = n-1; i > 0; i--)
-    {
-        // Mengenerate index secara random
-        int j = rand() % (i+1);
- 
-        // Menukar arr[i] dengar elemen array dengan index random
-        swap(&arr[i], &arr[j]);
-    }
+    int arr[2];
+
+    arr[0] = rand() % 80;
+    arr[1] = rand() % 80;
+
+    return arr[X];
 }
 
-int randomSkill(){
-    int arr[80];
-    int freq[6] = {10, 6, 15, 15, 4, 30};
-    int n = 0;
-    int count = 0;
-    for (int i = 1; i <= 6; i++)
+int randomSkill(int X){
+    if (X>=1 && X<=10)
     {
-        count += freq[i-1];
-        while (n<count)
-        {
-            arr[n] = i;
-            n += 1;
-        }
+        return 1;
+    } else if (X>10 && X<=16)
+    {
+        return 2;
+    } else if (X>16 && X<=31)
+    {
+        return 3;
+    } else if (X>31 && X<=46)
+    {
+        return 4;
+    } else if (X>46 && X<=50)
+    {
+        return 5;
+    } else
+    {
+        return 6;
     }
-
-    randomize(arr, 80);
-    return(arr[rand()%80]);
+    
 }
 
-void draw(Player *P, int currentPlayer){
+void draw(Player *P, int currentPlayer, int randomizer){
 // Menambahkan 1 Skill secara random ke lSkill Player yang sedang bermain di giliran ini.
     address S;
     S = newSkillNode();
-    int identifier = randomSkill();
+    int identifier = randomSkill(randomize(randomizer));
     Id(S) = identifier;
     constructSkill(S, Id(S));
     insertSkill(&skills(*P)[currentPlayer], S);
@@ -162,7 +154,52 @@ void discard(lSkill *lS, int skillOrder){
     }
 }
 
-// ----------------------------------------------------------------------- Skill Effects ----------------------------------------------------------------------------------- //
+void Activate(Player *P, lSkill *lS, int skillOrder, int currentPlayer){
+    int order = 1;
+    address S = *lS;
+    while (order < skillOrder)
+    {
+        S = Next(S);
+        order += 1;
+    }
+    if (Effect(S) != Nil)
+    {
+        Effect(S)(P, currentPlayer);
+    }
+    discard(lS, skillOrder);
+}
+
+void printSkill(Player *P, int currentPlayer){
+    address S = P->skills[currentPlayer];
+    int count = 1;
+    while (S != Nil)
+    {
+        if (Id(S) == 1)
+        {
+            printf("%d. Pintu ga Kemana-mana\n", count);
+        } else if (Id(S) == 2)
+        {
+            printf("%d. Cermin Pengganda\n", count);
+        } else if (Id(S) == 3)
+        {
+            printf("%d. Senter Pembesar Hoki\n", count);
+        }  else if (Id(S) == 4)
+        {
+            printf("%d. Senter Pengecil Hoki\n", count);
+        }  else if (Id(S) == 5)
+        {
+            printf("%d. Mesin Penukar Posisi\n", count);
+        }  else if (Id(S) == 6)
+        {
+            printf("%d. Teknologi Gagal\n", count);
+        }
+
+        count += 1;
+        S = Next(S);
+    }
+}
+
+// ----------------------------------------------------------------------- Skill Effects ----------------------------------------------------------------------- //
 void pintuGKM(Player *P, int currentPlayer){
 /* Player mendapat buff imunitas dari teleporter */
 /* tidak mendapat ekstra ketika diaktifkan berulang kali */
@@ -176,8 +213,8 @@ void cerminPengganda(Player *P, int currentPlayer){
 /* Menjalankan prosedur draw sebanyak 2 kali dan menambahkan skill yang didapat ke pemain */
     if (!isCermin(*P)[currentPlayer])
     {
-        draw(P, currentPlayer);
-        draw(P, currentPlayer);
+        draw(P, currentPlayer, 0);
+        draw(P, currentPlayer, 1);
     } 
 }
 
