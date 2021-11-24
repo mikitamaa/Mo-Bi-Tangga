@@ -199,7 +199,7 @@ void printSkill(Player *P, int currentPlayer){
     }
 }
 
-// ----------------------------------------------------------------------- Skill Effects ----------------------------------------------------------------------- //
+// ----------------------------------------------------------------------- Skill Effects ----------------------------------------------------------------------------------- //
 void pintuGKM(Player *P, int currentPlayer){
 /* Player mendapat buff imunitas dari teleporter */
 /* tidak mendapat ekstra ketika diaktifkan berulang kali */
@@ -215,19 +215,21 @@ void cerminPengganda(Player *P, int currentPlayer){
     {
         draw(P, currentPlayer, 0);
         draw(P, currentPlayer, 1);
-    } 
+
+        P->isCermin[currentPlayer] = true;
+    }
 }
 
 void senterPembesarHoki(Player *P, int currentPlayer){
 /* Pada giliran ini, dadu akan menghasilkan angka antara floor(MaxRoll/2) dan MaxRoll. */
 /* Tidak dapat digunakan berulang kali atau bersamaan dengan senter lain. */
-    isSenPem(*P)[currentPlayer] = true;
+    P->isSenPem[currentPlayer] = true;
 }
 
 void senterPengecilHoki(Player *P, int currentPlayer){
 /* Pada giliran ini, dadu akan menghasilkan angka antara 1 dan floor(MaxRoll/2). */
 /* Tidak dapat digunakan berulang kali atau bersamaan dengan senter lain. */
-    isSenPeng(*P)[currentPlayer] = true;
+    P->isSenPeng[currentPlayer] = true;
 }
 
 void mesinPenukarPosisi(Player *P, int currentPlayer){
