@@ -17,11 +17,22 @@ address Search (lSkill *ls, int skillOrder);
 /* Mencari apakah ada elemen list dengan urutan = skillOrder pada ls */
 /* Jika ada, mengirimkan address elemen tersebut. */
 /* Jika tidak ada, mengirimkan Nil */
+int randomize(int X);
+// Mengenerate dan mengembalikan salah satu elemen index ke-X dari array of integer hasil randomize.
+int randomSkill(int X);
+// Mengembalikan Id skill sesuai X.
 void constructSkill(address S, int id);
-void draw(Player *P, int currentPlayer);
+// Mengisi atribut-atribut skill sesuai id yang dimaksukkan.
+void draw(Player *P, int currentPlayer, int randomizer);
 // Menambahkan 1 Skill secara random ke lSkill Player yang sedang bermain di giliran ini.
 void discard(lSkill *ls, int skillOrder);
 // Membuang Skill dengan nomor urut skillOrder dari lSkill suatu pemain.
+void Activate(Player *P, lSkill *lS, int skillOrder, int currentPlayer);
+// Mengaktifkan efek dari Skill yang digunakan.
+void printSkill(Player *P, int currentPlayer);
+// Menampilkan skill apa saja yang dimiliki oleh pemain.
+
+// ----------------------------------------------------------- Skill Effects -----------------------------------------------------------//
 void pintuGKM(Player *P, int currentPlayer);
 /* Player mendapat buff imunitas dari teleporter */
 /* tidak mendapat ekstra ketika diaktifkan berulang kali */
@@ -36,7 +47,5 @@ void senterPengecilHoki(Player *P, int currentPlayer);
 void mesinPenukarPosisi(Player *P, int currentPlayer);
 /* Menukarkan posisi dua pemain pada map. */
 /* tidak mengaktifkan teleporter. */
-void  SKILL();
-/* Membuka menu skill untuk player yang menjalankan command "SKILL". */
 
 #endif
