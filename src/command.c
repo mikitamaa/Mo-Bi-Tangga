@@ -2,6 +2,7 @@
 #include "map.h"
 #include "roll.h"
 #include "player.h"
+#include "skill.h"
 #include <stdio.h>
 #include <string.h>
 
@@ -99,6 +100,37 @@ void command(MAP *Map, Player *P, int turnplayer, boolean endgame) {
             // SKILL
             case 1 :
                 printf("skill\n") ;
+                printf("skill\n") ;
+                printSkill(P->skills, turnplayer);
+                int activate;
+                while (activate != 0)
+                {
+                    printf("Masukan skill yang ingin dipakai: ");
+                    scanf("%d", &activate);
+                    if (Id(Search(P->skills, activate)) == 2)
+                    {
+                        if (P->isCermin[turnplayer] == false)
+                        {
+                            Activate(P, P->skills[turnplayer], activate, turnplayer);
+                        } else
+                        {
+                            printf("Kamu sudah memakai Cermin Pengganda turn ini.\n");
+                        }
+                    } else if (Id(Search(P->skills, activate)) == 3 || Id(Search(P->skills, activate)) == 4)
+                    {
+                        if (P->isSenPem[turnplayer] == false)
+                        {
+                            Activate(P, P->skills[turnplayer], activate, turnplayer);
+                        } else
+                        {
+                            printf("Kamu sudah memakai Senter Pembesar atau Pengecil turn ini.\n");
+                        }
+                    } else
+                    {
+                        Activate(P, P->skills[turnplayer], activate, turnplayer);
+                    }
+                    scanf("%d", &activate);
+                }
                 break ;
 
             // MAP    
