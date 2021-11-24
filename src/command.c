@@ -100,8 +100,7 @@ void command(MAP *Map, Player *P, int turnplayer, boolean endgame) {
             // SKILL
             case 1 :
                 printf("skill\n") ;
-                printf("skill\n") ;
-                printSkill(P->skills, turnplayer);
+                printSkill(P, turnplayer);
                 int activate;
                 while (activate != 0)
                 {
@@ -111,7 +110,7 @@ void command(MAP *Map, Player *P, int turnplayer, boolean endgame) {
                     {
                         if (P->isCermin[turnplayer] == false)
                         {
-                            Activate(P, P->skills[turnplayer], activate, turnplayer);
+                            Activate(P, &P->skills[turnplayer], activate, turnplayer);
                         } else
                         {
                             printf("Kamu sudah memakai Cermin Pengganda turn ini.\n");
@@ -120,14 +119,14 @@ void command(MAP *Map, Player *P, int turnplayer, boolean endgame) {
                     {
                         if (P->isSenPem[turnplayer] == false)
                         {
-                            Activate(P, P->skills[turnplayer], activate, turnplayer);
+                            Activate(P, &P->skills[turnplayer], activate, turnplayer);
                         } else
                         {
                             printf("Kamu sudah memakai Senter Pembesar atau Pengecil turn ini.\n");
                         }
                     } else
                     {
-                        Activate(P, P->skills[turnplayer], activate, turnplayer);
+                        Activate(P, &P->skills[turnplayer], activate, turnplayer);
                     }
                     scanf("%d", &activate);
                 }
