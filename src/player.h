@@ -18,15 +18,15 @@ typedef address lSkill;
 typedef struct
 {
     int Neff;
-    char uName[IdxMax - IdxMin][16];
-    ElType pos[IdxMax - IdxMin];
-    boolean isTelep[IdxMax - IdxMin];
-    boolean isImmu[IdxMax - IdxMin];
-    boolean isSenPem[IdxMax - IdxMin];
-    boolean isSenPeng[IdxMax - IdxMin];
-    boolean isCermin[IdxMax - IdxMin];
-    boolean isUdahRoll[IdxMax - IdxMin];
-    lSkill skills[IdxMax - IdxMin];
+    char uName[IdxMax - IdxMin + 1][16];
+    ElType pos[IdxMax - IdxMin + 1];
+    boolean isTelep[IdxMax - IdxMin + 1];
+    boolean isImmu[IdxMax - IdxMin + 1];
+    boolean isSenPem[IdxMax - IdxMin + 1];
+    boolean isSenPeng[IdxMax - IdxMin + 1];
+    boolean isCermin[IdxMax - IdxMin + 1];
+    boolean isUdahRoll[IdxMax - IdxMin + 1];
+    lSkill skills[IdxMax - IdxMin + 1];
 } Player;
 
 typedef struct listSkillNode

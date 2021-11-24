@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <string.h>
 
-void command(MAP *Map, Player *P, int turnplayer, boolean endgame) {
+void command(MAP *Map, Player *P, int turnplayer, boolean *endgame, boolean *endronde) {
     int i, hasilcommand ;
     boolean endthisturn = false ;
 
@@ -98,37 +98,40 @@ void command(MAP *Map, Player *P, int turnplayer, boolean endgame) {
 
         switch(hasilcommand) {
             // SKILL
-            case 1 :
-                printf("skill\n") ;
-                printSkill(P, turnplayer);
-                int activate;
+            case 1 : ;
+                int activate = 99 ;
                 while (activate != 0)
                 {
+                    printf("\n") ;
+                    printSkill(P, turnplayer);
+                    printf("\n") ;
+                    printf("Jika tidak ingin menggunakan skill masukkan 0.\n") ;
                     printf("Masukan skill yang ingin dipakai: ");
-                    scanf("%d", &activate);
+                    scanf("%d", &activate) ;
+                    printf("\n") ;
                     if (activate != 0)
                     {
-                        if (Id(Search(P->skills, activate)) == 2)
+                        if (Id(Search(&P->skills[turnplayer], activate)) == 2)
                         {
                             if (P->isCermin[turnplayer] == false)
                             {
-                                Activate(P, &P->skills[turnplayer], activate, turnplayer);
+                                Activate(P, &skills(*P)[turnplayer], activate, turnplayer);
                             } else
                             {
                                 printf("Kamu sudah memakai Cermin Pengganda turn ini.\n");
                             }
-                        } else if (Id(Search(P->skills, activate)) == 3 || Id(Search(P->skills, activate)) == 4)
+                        } else if (Id(Search(&P->skills[turnplayer], activate)) == 3 || Id(Search(&P->skills[turnplayer], activate)) == 4)
                         {
-                            if (P->isSenPem[turnplayer] == false)
+                            if (P->isSenPem[turnplayer] == false && P->isSenPeng[turnplayer] == false)
                             {
-                                Activate(P, &P->skills[turnplayer], activate, turnplayer);
+                                Activate(P, &skills(*P)[turnplayer], activate, turnplayer);
                             } else
                             {
                                 printf("Kamu sudah memakai Senter Pembesar atau Pengecil turn ini.\n");
                             }
                         } else
                         {
-                            Activate(P, &P->skills[turnplayer], activate, turnplayer);
+                            Activate(P, &skills(*P)[turnplayer], activate, turnplayer);
                         }
                     }
                 }
@@ -271,11 +274,13 @@ void command(MAP *Map, Player *P, int turnplayer, boolean endgame) {
                                     if (pilihanteleport == 'Y') {
                                     (*P).pos[turnplayer] = (*Map).TabMap[(*P).pos[turnplayer]].Teleporter ;
                                     printf("%s teleport ke petak %d.\n", (*P).uName[turnplayer], (*P).pos[turnplayer]) ;
+                                    pilihanteleportvalid = true ;
                                     }
                                     else if (pilihanteleport == 'N') {
                                         printf("%s tidak teleport.\n", (*P).uName[turnplayer]) ;
                                         (*P).isImmu[turnplayer] = false ;
                                         printf("Buff imunitas teleport hilang.\n") ;
+                                        pilihanteleportvalid = true ;
                                     }
                                     else {
                                         printf("Pilihan teleport harus Y atau N.\n\n") ;
@@ -299,7 +304,8 @@ void command(MAP *Map, Player *P, int turnplayer, boolean endgame) {
                     endthisturn = true ;
                     printf("%s telah mencapai ujung.\n", (*P).uName[turnplayer]) ;
                     printf("Pemenang game ini adalah %s.\n\n", (*P).uName[turnplayer]) ;
-                    endgame = true ;
+                    *endgame = true ;
+                    *endronde = true ;
                 }
                 break ;
 
