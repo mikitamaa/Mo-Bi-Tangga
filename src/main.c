@@ -58,7 +58,7 @@ int main () {
 
             // Menuliskan Map setiap awal giliran
             for (int imap = 1; imap <= P.Neff; imap++) {
-                    printf("%s", P.uName[imap]) ;
+                    printf("%s\t", P.uName[imap]) ;
                     printf(" : ") ;
                     for (int jmap = 1; jmap <= Map.PanjangMap; jmap++) {
                         if (P.pos[imap] == jmap) {

@@ -2,6 +2,7 @@
 #include "skill.h"
 #include <stdio.h>
 #include <time.h>
+#include <string.h>
 
 /* 
 Identifier Skill
@@ -170,9 +171,10 @@ void Activate(Player *P, lSkill *lS, int skillOrder, int currentPlayer){
 
 void printSkill(Player *P, int currentPlayer){
     address S = P->skills[currentPlayer];
-    int count = 1;
+    int count = 0;
     while (S != Nil)
     {
+        count++ ;
         if (Id(S) == 1)
         {
             printf("%d. Pintu ga Kemana-mana\n", count);
@@ -193,8 +195,11 @@ void printSkill(Player *P, int currentPlayer){
             printf("%d. Teknologi Gagal\n", count);
         }
 
-        count += 1;
         S = Next(S);
+    }
+
+    if (count == 0) {
+        printf("Kamu tidak memiliki skill.\n") ;
     }
 }
 
@@ -249,26 +254,32 @@ void constructSkill(address S, int id){
     {
     case 1:
         Id(S) = 1;
+        strcpy(Name(S), "Pintu Ga Kemana Mana") ;
         Effect(S) = pintuGKM;
         break;
     case 2:
         Id(S) = 2;
+        strcpy(Name(S), "Cermin Pengganda") ;
         Effect(S) = cerminPengganda;
         break;
     case 3:
         Id(S) = 3;
+        strcpy(Name(S), "Senter Pembesar Hoki") ;
         Effect(S) = senterPembesarHoki;
         break;
     case 4:
         Id(S) = 4;
+        strcpy(Name(S), "Senter Pengecil Hoki") ;
         Effect(S) = senterPengecilHoki;
         break;
     case 5:
         Id(S) = 5;
+        strcpy(Name(S), "Mesin Penukar Posisi") ;
         Effect(S) = mesinPenukarPosisi;
         break;
     case 6:
         Id(S) = 6;
+        strcpy(Name(S), "Teknologi Gagal") ;
         Effect(S) = Nil;
         break;
     default:
