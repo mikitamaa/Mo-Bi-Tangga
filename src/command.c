@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include <string.h>
 
-void command(MAP *Map, Player *P, Stack *Stack, int turnplayer, boolean *endgame, boolean *endronde) {
+void command(MAP *Map, Player *P, Stack *Stack, int turnplayer, boolean *endgame, boolean *endronde, int *jumlahronde) {
     int i, hasilcommand ;
     boolean endthisturn = false ;
 
@@ -379,17 +379,42 @@ void command(MAP *Map, Player *P, Stack *Stack, int turnplayer, boolean *endgame
                 endthisturn = true ;
                 *endronde = true ;
                 boolean undovalid = false ;
+                boolean PopBerhasil ;
                 char undo ;
-                Pop(Stack, P) ;
-                printf("Command Undo berhasil digunakan.\n") ;
-                printf("State permainan akan kembali ke akhir ronde sebelumnya.\n\n") ;
-                while (!undovalid) {
+                (*jumlahronde)-- ;
+                Pop(Stack, P, &PopBerhasil) ;
+                if (PopBerhasil) {
+                    printf("Command Undo berhasil digunakan.\n") ;
+                    if (*jumlahronde == 0) {
+                        printf("State permainan akan kembali ke awal permainan.\n\n") ;
+                        PopBerhasil = false ;
+                    }
+                    else {
+                        printf("State permainan akan kembali ke akhir ronde %d.\n\n", *jumlahronde) ;
+                    }
+                }
+                else {
+                    printf("Undo gagal.\n\n") ;
+                }
+                while (!undovalid && PopBerhasil) {
                     printf("Apakah ingin melakukan undo lagi? (Y/N): ") ;
-                    scanf("%c", &undo) ;
+                    scanf(" %c", &undo) ;
                     if (undo == 'Y') {
-                        Pop(Stack, P) ;
-                        printf("Command Undo berhasil digunakan.\n") ;
-                        printf("State permainan akan kembali ke akhir ronde sebelumnya.\n\n") ;
+                        Pop(Stack, P, &PopBerhasil) ;
+                        if (PopBerhasil) {
+                            (*jumlahronde)-- ;
+                            printf("Command Undo berhasil digunakan.\n") ;
+                            if (*jumlahronde == 0) {
+                                printf("State permainan akan kembali ke awal permainan.\n\n") ;
+                                PopBerhasil = false ;
+                            }
+                            else {
+                                printf("State permainan akan kembali ke akhir ronde %d.\n\n", *jumlahronde) ;
+                            }       
+                        }
+                        else {
+                            printf("Undo gagal.\n\n") ;
+                        }
                     }
                     else if (undo == 'N') {
                         undovalid = true ;
@@ -399,6 +424,7 @@ void command(MAP *Map, Player *P, Stack *Stack, int turnplayer, boolean *endgame
                         printf("Pilihan undo harus Y atau N.\n\n") ;
                     }
                 }
+                break ;
 
             // INPUT SALAH
             default :

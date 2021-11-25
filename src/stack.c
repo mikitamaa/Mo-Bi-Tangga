@@ -1,4 +1,5 @@
 #include "stack.h"
+#include <stdio.h>
 
 
 /* ************ Prototype ************ */
@@ -39,10 +40,14 @@ void Push (Stack * S, Player * P)
         Top(*S) = 1;
     }
     InfoTop(*S) = *P;
+    for (int i = 1; i <= (*P).Neff; i++) {
+        (*S).P[Top(*S)].skills[i] = Nil ;
+        copySkill((*P).skills[i], &(*S).P[Top(*S)].skills[i]) ;
+    }
 }
 
 /* ************ Menghapus sebuah elemen Stack ************ */
-void Pop (Stack * S, Player * P)
+void Pop (Stack * S, Player * P, boolean *PopBerhasil)
 /* Menghapus X dari Stack S. */
 /* I.S. S  mungkin kosong */
 /* F.S. X adalah nilai elemen TOP yang lama, TOP berkurang 1 */
@@ -50,8 +55,10 @@ void Pop (Stack * S, Player * P)
     if (!IsEmpty(*S)){
         *P = InfoTop(*S);
         Top(*S)--;
+        *PopBerhasil = true ;
     } else{
         printf("Tidak dapat undo permainan.\n");
+        *PopBerhasil = false ;
     }
 
 }

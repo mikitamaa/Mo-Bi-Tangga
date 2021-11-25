@@ -18,6 +18,6 @@ char undo[4] = {'U','N','D','O'} ;                  //8
 
 char CommandTab[10] ;
 
-void command(MAP *Map, Player *P,Stack *Stack, int turnplayer, boolean *endgame, boolean *endronde) ;
+void command(MAP *Map, Player *P,Stack *Stack, int turnplayer, boolean *endgame, boolean *endronde, int *jumlahronde) ;
 
 #endif

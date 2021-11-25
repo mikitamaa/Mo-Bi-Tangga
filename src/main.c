@@ -1,19 +1,4 @@
 #include "command.h"
-#include "command.c"
-#include "mesin_kar.h"
-#include "mesin_kar.c"
-#include "mesin_kata.h"
-#include "mesin_kata.c"
-#include "map.h"
-#include "map.c"
-#include "roll.h"
-#include "roll.c"
-#include "player.h"
-#include "player.c"
-#include "skill.h"
-#include "skill.c"
-#include "stack.h"
-#include "stack.c"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -80,7 +65,7 @@ int main () {
                 }
             printf("\n") ;
 
-            command(&Map, &P, &Stack, i, &endgame, &endronde) ;
+            command(&Map, &P, &Stack, i, &endgame, &endronde, &jumlahronde) ;
             i++ ;
             
         }

@@ -7,6 +7,7 @@
 
 #include "boolean.h"
 #include "player.h"
+#include "skill.h"
 
 #define NilStack 0
 #define MaxEl 101
@@ -52,7 +53,7 @@ void Push (Stack * S, Player * P);
 /* F.S. X menjadi TOP yang baru,TOP bertambah 1 */
 
 /* ************ Menghapus sebuah elemen Stack ************ */
-void Pop (Stack * S, Player * P);
+void Pop (Stack * S, Player * P, boolean *PopBerhasil);
 /* Menghapus X dari Stack S. */
 /* I.S. S  mungkin kosong */
 /* F.S. X adalah nilai elemen TOP yang lama, TOP berkurang 1 */
