@@ -12,8 +12,11 @@
 #include "player.c"
 #include "skill.h"
 #include "skill.c"
+#include "stack.h"
+#include "stack.c"
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 int main () {
     // boolean endgame = false ;
@@ -42,11 +45,15 @@ int main () {
     MAP Map ;
     KonfigurasiToMap(&Map) ;
 
+    Stack Stack ;
+    CreateEmptyStack(&Stack) ;
+
     // Game akan terus berjalan hingga ada pemain yang menang (endgame = true)
     boolean endgame = false ;
     boolean endronde = false ;
     int jumlahronde = 1 ;
     while (!endgame) {
+        Push(&Stack, &P) ;
         int i = 1;
         endronde = false ;
         printf("-- Ronde ke-%d --\n\n", jumlahronde) ;
@@ -73,7 +80,7 @@ int main () {
                 }
             printf("\n") ;
 
-            command(&Map, &P, i, &endgame, &endronde) ;
+            command(&Map, &P, &Stack, i, &endgame, &endronde) ;
             i++ ;
             
         }

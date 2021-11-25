@@ -5,6 +5,7 @@
 #include "mesin_kata.h"
 #include "map.h"
 #include "player.h"
+#include "stack.h"
 
 char skill[5] = {'S','K','I','L','L'} ;             //1
 char map[3] = {'M','A','P'} ;                       //2
@@ -17,6 +18,6 @@ char undo[4] = {'U','N','D','O'} ;                  //8
 
 char CommandTab[10] ;
 
-void command(MAP *Map, Player *P, int turnplayer, boolean *endgame, boolean *endronde) ;
+void command(MAP *Map, Player *P,Stack *Stack, int turnplayer, boolean *endgame, boolean *endronde) ;
 
 #endif

@@ -3,10 +3,11 @@
 #include "roll.h"
 #include "player.h"
 #include "skill.h"
+#include "stack.h"
 #include <stdio.h>
 #include <string.h>
 
-void command(MAP *Map, Player *P, int turnplayer, boolean *endgame, boolean *endronde) {
+void command(MAP *Map, Player *P, Stack *Stack, int turnplayer, boolean *endgame, boolean *endronde) {
     int i, hasilcommand ;
     boolean endthisturn = false ;
 
@@ -331,12 +332,16 @@ void command(MAP *Map, Player *P, int turnplayer, boolean *endgame, boolean *end
 
             // UNDO
             case 8 :
-                printf("undo\n") ;
-                break;
+                endthisturn = true ;
+                *endronde = true ;
+                Pop(Stack, P) ;
+                printf("Command Undo berhasil digunakan.\n") ;
+                printf("State permainan akan kembali ke akhir ronde sebelumnya.\n\n") ;
+                break ;
 
             // INPUT SALAH
             default :
-                printf("invalid\n") ;
+                printf("\nInvalid\n\n") ;
         }
     }
 }
