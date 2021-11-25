@@ -52,8 +52,8 @@ int main () {
     boolean endgame = false ;
     boolean endronde = false ;
     int jumlahronde = 1 ;
+    Push(&Stack, &P) ;
     while (!endgame) {
-        Push(&Stack, &P) ;
         int i = 1;
         endronde = false ;
         printf("-- Ronde ke-%d --\n\n", jumlahronde) ;
@@ -89,5 +89,6 @@ int main () {
         }
         jumlahronde++ ;
         printf("\n") ;
+        Push(&Stack, &P) ;
     }
 }

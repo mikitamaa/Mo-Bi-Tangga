@@ -51,7 +51,7 @@ void Pop (Stack * S, Player * P)
         *P = InfoTop(*S);
         Top(*S)--;
     } else{
-        printf("Tidak dapat undo permainan");
+        printf("Tidak dapat undo permainan.\n");
     }
 
 }

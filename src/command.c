@@ -359,9 +359,9 @@ void command(MAP *Map, Player *P, Stack *Stack, int turnplayer, boolean *endgame
                         printSkill(P, turnplayer);
                         printf("Skill kamu melebihi batas maksimal. Pilih Skill untuk dibuang: ");
                         discard(&skills(*P)[turnplayer], skillOrder);
-                }
-                        
                     }
+                        
+                }
                 if ((*P).isUdahRoll[turnplayer]) {
                     endthisturn = true ;
                     (*P).isCermin[turnplayer] = false ;
@@ -378,10 +378,27 @@ void command(MAP *Map, Player *P, Stack *Stack, int turnplayer, boolean *endgame
             case 8 :
                 endthisturn = true ;
                 *endronde = true ;
+                boolean undovalid = false ;
+                char undo ;
                 Pop(Stack, P) ;
                 printf("Command Undo berhasil digunakan.\n") ;
                 printf("State permainan akan kembali ke akhir ronde sebelumnya.\n\n") ;
-                break ;
+                while (!undovalid) {
+                    printf("Apakah ingin melakukan undo lagi? (Y/N): ") ;
+                    scanf("%c", &undo) ;
+                    if (undo == 'Y') {
+                        Pop(Stack, P) ;
+                        printf("Command Undo berhasil digunakan.\n") ;
+                        printf("State permainan akan kembali ke akhir ronde sebelumnya.\n\n") ;
+                    }
+                    else if (undo == 'N') {
+                        undovalid = true ;
+                        printf("\n") ;
+                    }
+                    else {
+                        printf("Pilihan undo harus Y atau N.\n\n") ;
+                    }
+                }
 
             // INPUT SALAH
             default :

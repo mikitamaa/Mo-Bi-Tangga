@@ -191,30 +191,30 @@ void Activate(Player *P, lSkill *lS, int skillOrder, int currentPlayer){
 }
 
 void printOneSkill(lSkill *lS, int skillOrder){
-    address *S = lS;
+    address S = *lS;
     int count = 1;
     while (count<skillOrder)
     {
-        *S = Next(*S);
+        S = Next(S);
         count += 1;
     }
 
-    if (Id(*S) == 1)
+    if (Id(S) == 1)
     {
         printf("Pintu ga Kemana-mana\n");
-    } else if (Id(*S) == 2)
+    } else if (Id(S) == 2)
     {
         printf("Cermin Pengganda\n");
-    } else if (Id(*S) == 3)
+    } else if (Id(S) == 3)
     {
         printf("Senter Pembesar Hoki\n");
-    }  else if (Id(*S) == 4)
+    }  else if (Id(S) == 4)
     {
         printf("Senter Pengecil Hoki\n");
-    }  else if (Id(*S) == 5)
+    }  else if (Id(S) == 5)
     {
         printf("Mesin Penukar Posisi\n");
-    }  else if (Id(*S) == 6)
+    }  else if (Id(S) == 6)
     {
         printf("Teknologi Gagal\n");
     }
