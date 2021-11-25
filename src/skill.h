@@ -6,6 +6,10 @@
 
 #define Nil NULL
 
+boolean isSkillEmpty(lSkill lS);
+// Mengembalikan true jika lS = Nil.
+int jumlahSkill(lSkill lS);
+// Mengembalikan jumlah skill yang ada pada lS.
 address newSkillNode();
 // Mengembalikan alamat hasil Alokasi Skill
 void CreateEmpty(lSkill *ls);
@@ -29,6 +33,8 @@ void discard(lSkill *ls, int skillOrder);
 // Membuang Skill dengan nomor urut skillOrder dari lSkill suatu pemain.
 void Activate(Player *P, lSkill *lS, int skillOrder, int currentPlayer);
 // Mengaktifkan efek dari Skill yang digunakan.
+void printOneSkill(lSkill *lS, int skillOrder);
+// Menampilkan skill pada urutan skillOrder.
 void printSkill(Player *P, int currentPlayer);
 // Menampilkan skill apa saja yang dimiliki oleh pemain.
 
@@ -47,5 +53,8 @@ void senterPengecilHoki(Player *P, int currentPlayer);
 void mesinPenukarPosisi(Player *P, int currentPlayer);
 /* Menukarkan posisi dua pemain pada map. */
 /* tidak mengaktifkan teleporter. */
+
+// ----------------------------------------------------------------------- External Purposes -----------------------------------------------------------------------//
+void copySkill(lSkill origin, lSkill *copy);
 
 #endif
