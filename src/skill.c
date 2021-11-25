@@ -2,7 +2,6 @@
 #include "skill.h"
 #include <stdio.h>
 #include <time.h>
-#include <string.h>
 
 /* 
 Identifier Skill
@@ -16,6 +15,10 @@ Identifier Skill
  */
 
 // ----------------------------------------------------------------------- Generic Purpose Use ----------------------------------------------------------------------------------- //
+boolean isSkillEmpty(lSkill lS){
+    return (lS == Nil);
+}
+
 address newSkillNode(){
 /*
  Fungsi mereturn sebuah address dari Skill (list skill node)
@@ -38,6 +41,24 @@ void CreateEmpty (lSkill *lS) {
 /* I.S. sembarang             */
 /* F.S. Terbentuk list kosong */
     *lS = Nil;
+}
+
+int jumlahSkill(lSkill lS){
+    if (isSkillEmpty(lS))
+    {
+        return 0;
+    } else
+    {
+        int count = 0;
+        address P = lS;
+        while (P != Nil)
+        {
+            count += 1;
+            P = Next(P);
+        }
+        return count;
+    }
+    
 }
 
 void insertSkill (lSkill *lS, address S){
@@ -169,12 +190,41 @@ void Activate(Player *P, lSkill *lS, int skillOrder, int currentPlayer){
     discard(lS, skillOrder);
 }
 
+void printOneSkill(lSkill *lS, int skillOrder){
+    address *S = lS;
+    int count = 1;
+    while (count<skillOrder)
+    {
+        *S = Next(*S);
+        count += 1;
+    }
+
+    if (Id(*S) == 1)
+    {
+        printf("Pintu ga Kemana-mana\n");
+    } else if (Id(*S) == 2)
+    {
+        printf("Cermin Pengganda\n");
+    } else if (Id(*S) == 3)
+    {
+        printf("Senter Pembesar Hoki\n");
+    }  else if (Id(*S) == 4)
+    {
+        printf("Senter Pengecil Hoki\n");
+    }  else if (Id(*S) == 5)
+    {
+        printf("Mesin Penukar Posisi\n");
+    }  else if (Id(*S) == 6)
+    {
+        printf("Teknologi Gagal\n");
+    }
+}
+
 void printSkill(Player *P, int currentPlayer){
     address S = P->skills[currentPlayer];
-    int count = 0;
+    int count = 1;
     while (S != Nil)
     {
-        count++ ;
         if (Id(S) == 1)
         {
             printf("%d. Pintu ga Kemana-mana\n", count);
@@ -195,11 +245,8 @@ void printSkill(Player *P, int currentPlayer){
             printf("%d. Teknologi Gagal\n", count);
         }
 
+        count += 1;
         S = Next(S);
-    }
-
-    if (count == 0) {
-        printf("Kamu tidak memiliki skill.\n") ;
     }
 }
 
@@ -254,35 +301,43 @@ void constructSkill(address S, int id){
     {
     case 1:
         Id(S) = 1;
-        strcpy(Name(S), "Pintu Ga Kemana Mana") ;
         Effect(S) = pintuGKM;
         break;
     case 2:
         Id(S) = 2;
-        strcpy(Name(S), "Cermin Pengganda") ;
         Effect(S) = cerminPengganda;
         break;
     case 3:
         Id(S) = 3;
-        strcpy(Name(S), "Senter Pembesar Hoki") ;
         Effect(S) = senterPembesarHoki;
         break;
     case 4:
         Id(S) = 4;
-        strcpy(Name(S), "Senter Pengecil Hoki") ;
         Effect(S) = senterPengecilHoki;
         break;
     case 5:
         Id(S) = 5;
-        strcpy(Name(S), "Mesin Penukar Posisi") ;
         Effect(S) = mesinPenukarPosisi;
         break;
     case 6:
         Id(S) = 6;
-        strcpy(Name(S), "Teknologi Gagal") ;
         Effect(S) = Nil;
         break;
     default:
         break;
     }
+}
+
+// ----------------------------------------------------------------------- External Purposes ----------------------------------------------------------------------------------- //
+void copySkill(lSkill origin, lSkill *copy){
+    lSkill O = origin;
+    while (O != Nil)
+    {
+        address S;
+        S = newSkillNode();
+        constructSkill(S, Id(O));
+        insertSkill(copy, S);
+        O = Next(O);
+    }
+    
 }
