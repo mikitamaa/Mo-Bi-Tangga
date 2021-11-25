@@ -352,7 +352,8 @@ void command(MAP *Map, Player *P, Stack *Stack, int turnplayer, boolean *endgame
             case 7 :
                 if (jumlahSkill(skills(*P)[turnplayer]) > 10)
                 {
-                    for (int i = 0; i < jumlahSkill(skills(*P)[turnplayer]); i++)
+                    int initSkillTotal = jumlahSkill(skills(*P)[turnplayer]);
+                    for (int i = 0; i < initSkillTotal; i++)
                     {
                         int skillOrder;
                         printSkill(P, turnplayer);
