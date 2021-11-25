@@ -13,7 +13,7 @@ void addPlayer(Player *P, int n)
     for (int i = 1; i <= n; i++)
     {
         printf("Masukkan Username pemain %d: ", i);
-        scanf("%s", &(uName(*P)[i]));
+        scanf("%s", (uName(*P)[i]));
         int j = 1;
         while (j <= n)
         {
@@ -21,7 +21,7 @@ void addPlayer(Player *P, int n)
             {
                 printf("Username %s sudah digunakan player lain!\n", uName(*P)[i]);
                 printf("Masukkan Username lain untuk pemain %d: ", i);
-                scanf("%s", &(uName(*P)[i]));
+                scanf("%s", (uName(*P)[i]));
             }
             else
             {

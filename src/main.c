@@ -32,10 +32,19 @@ int main () {
 
     // }
 
-    printf("Masukkan jumlah pemain: ") ;
+    boolean jumlahpemainvalid = false ;
     int jumlahpemain ; 
-    scanf("%d", &jumlahpemain) ;
-    printf("\n") ;
+    while (!jumlahpemainvalid) {
+        printf("Masukkan jumlah pemain: ") ;
+        scanf("%d", &jumlahpemain) ;
+        if (jumlahpemain < 2 || jumlahpemain > 4) {
+            printf("Jumlah pemain harus diantara 2 sampai 4 pemain.\n") ;
+        }
+        else {
+            jumlahpemainvalid = true ;
+        }
+        printf("\n") ;
+    }
     Player P ;
     createEmptyPlayerList(&P) ;
     addPlayer(&P, jumlahpemain) ;
