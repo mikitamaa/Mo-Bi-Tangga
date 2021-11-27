@@ -112,3 +112,31 @@ int getPlayerPosition(Player P, char *uName)
         return (pos(P)[idx]);
     }
 }
+
+void PeringkatPlayer(Player * P) {
+    int temp1[(*P).Neff] ;
+    int temp2[(*P).Neff] ;
+    for (int i = 0; i < (*P).Neff; i++) {
+        temp1[i] = (*P).pos[i + 1] ;
+        temp2[i] = i + 1 ;
+    }
+
+    int tmp1, tmp2 ;
+    for (int j = (*P).Neff - 1; j >= 0; j--) {
+        for (int k = j; k >= 0; k--) {
+            if (temp1[j] < temp1[k]) {
+                tmp1 = temp1[j] ;
+                temp1[j] = temp1[k] ;
+                temp1[k] = tmp1 ; 
+
+                tmp2 = temp2[j] ;
+                temp2[j] = temp2[k] ;
+                temp2[k] = tmp2 ;
+            }
+        }
+    }
+
+    for (int l = (*P).Neff - 1; l >= 0; l--) {
+        printf("Peringkat %d: %s dengan posisi di petak ke-%d.\n", (*P).Neff - l, (*P).uName[temp2[l]], temp1[l]) ;
+    }
+}

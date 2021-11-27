@@ -101,73 +101,77 @@ void command(MAP *Map, Player *P, Stack *Stack, int turnplayer, boolean *endgame
             // SKILL
             case 1 : ;
                 int activate = 99 ;
-                while (activate != 0)
-                {
-                    printf("\n") ;
-                    if (isSkillEmpty(skills(*P)[turnplayer]))
+                if (!(*P).isUdahRoll[turnplayer]) {
+                    while (activate != 0)
                     {
-                        printf("Kamu tidak memiliki Skill saat ini.\n");
-                    }
-                    else
-                    {
-                        printSkill(P, turnplayer);
-                    }
-                    printf("\n") ;
-                    printf("Jika tidak ingin menggunakan skill masukkan 0.\n") ;
-                    printf("Masukan skill yang ingin dipakai: ");
-                    scanf("%d", &activate) ;
-                    printf("\n") ;
-                    if (activate != 0)
-                    {
-                        if (activate > jumlahSkill(skills(*P)[turnplayer]))
+                        printf("\n") ;
+                        if (isSkillEmpty(skills(*P)[turnplayer]))
                         {
-                            printf("Skill mu tidak sebanyak itu, Hey! Pakai yang ada!\n");
-                        }
-                        else if (activate>0 && activate <= jumlahSkill(skills(*P)[turnplayer]))
-                        {
-                            if (Id(Search(&P->skills[turnplayer], activate)) == 2)
-                            {
-                                if (P->isCermin[turnplayer] == false)
-                                {
-                                    printf("%s mengaktifkan ", uName(*P)[turnplayer]);
-                                    printOneSkill(&skills(*P)[turnplayer], activate);
-                                    Activate(P, &skills(*P)[turnplayer], activate, turnplayer);
-                                } else
-                                {
-                                    printf("Kamu sudah memakai Cermin Pengganda turn ini.\n");
-                                }
-                            } 
-                            else if (Id(Search(&P->skills[turnplayer], activate)) == 3 || Id(Search(&P->skills[turnplayer], activate)) == 4)
-                            {
-                                if (P->isSenPem[turnplayer] == false && P->isSenPeng[turnplayer] == false)
-                                {
-                                    printf("%s mengaktifkan ", uName(*P)[turnplayer]);
-                                    printOneSkill(&skills(*P)[turnplayer], activate);
-                                    Activate(P, &skills(*P)[turnplayer], activate, turnplayer);
-                                } else
-                                {
-                                    printf("Kamu sudah memakai Senter Pembesar atau Pengecil turn ini.\n");
-                                }
-                            } 
-                            else
-                            {
-                                printf("%s mengaktifkan ", uName(*P)[turnplayer]);
-                                printOneSkill(&skills(*P)[turnplayer], activate);
-                                Activate(P, &skills(*P)[turnplayer], activate, turnplayer);
-                            }
-                        }
-                        else if (activate<0 && -activate<= jumlahSkill(skills(*P)[turnplayer]))
-                        {
-                            printf("%s membuang ", uName(*P)[turnplayer]);
-                            printOneSkill(&skills(*P)[turnplayer], activate);
-                            discard(&skills(*P)[turnplayer], -activate);
+                            printf("Kamu tidak memiliki Skill saat ini.\n");
                         }
                         else
                         {
-                            printf("Input tidak valid!\n");
+                            printSkill(P, turnplayer);
                         }
-                        
+                        printf("\n") ;
+                        printf("Jika tidak ingin menggunakan skill masukkan 0.\n") ;
+                        printf("Masukan skill yang ingin dipakai: ");
+                        scanf("%d", &activate) ;
+                        printf("\n") ;
+                        if (activate != 0)
+                        {
+                            if (activate > jumlahSkill(skills(*P)[turnplayer]))
+                            {
+                                printf("Skill mu tidak sebanyak itu, Hey! Pakai yang ada!\n");
+                            }
+                            else if (activate>0 && activate <= jumlahSkill(skills(*P)[turnplayer]))
+                            {
+                                if (Id(Search(&P->skills[turnplayer], activate)) == 2)
+                                {
+                                    if (P->isCermin[turnplayer] == false)
+                                    {
+                                        printf("%s mengaktifkan ", uName(*P)[turnplayer]);
+                                        printOneSkill(&skills(*P)[turnplayer], activate);
+                                        Activate(P, &skills(*P)[turnplayer], activate, turnplayer);
+                                    } else
+                                    {
+                                        printf("Kamu sudah memakai Cermin Pengganda turn ini.\n");
+                                    }
+                                } 
+                                else if (Id(Search(&P->skills[turnplayer], activate)) == 3 || Id(Search(&P->skills[turnplayer], activate)) == 4)
+                                {
+                                    if (P->isSenPem[turnplayer] == false && P->isSenPeng[turnplayer] == false)
+                                    {
+                                        printf("%s mengaktifkan ", uName(*P)[turnplayer]);
+                                        printOneSkill(&skills(*P)[turnplayer], activate);
+                                        Activate(P, &skills(*P)[turnplayer], activate, turnplayer);
+                                    } else
+                                    {
+                                        printf("Kamu sudah memakai Senter Pembesar atau Pengecil turn ini.\n");
+                                    }
+                                } 
+                                else
+                                {
+                                    printf("%s mengaktifkan ", uName(*P)[turnplayer]);
+                                    printOneSkill(&skills(*P)[turnplayer], activate);
+                                    Activate(P, &skills(*P)[turnplayer], activate, turnplayer);
+                                }
+                            }
+                            else if (activate<0 && -activate<= jumlahSkill(skills(*P)[turnplayer]))
+                            {
+                                printf("%s membuang ", uName(*P)[turnplayer]);
+                                printOneSkill(&skills(*P)[turnplayer], activate);
+                                discard(&skills(*P)[turnplayer], -activate);
+                            }
+                            else
+                            {
+                                printf("Input tidak valid!\n");
+                            }
+                        }
                     }
+                }
+                else {
+                    printf("Tidak dapat melakukan command skill setelah roll.\n") ;
                 }
                 break ;
 
@@ -345,7 +349,7 @@ void command(MAP *Map, Player *P, Stack *Stack, int turnplayer, boolean *endgame
 
             // SAVE
             case 6 :
-                printf("save\n") ;
+                printf("Gabisa save game hehe :D\n\n") ;
                 break ;
 
             // ENDTURN
@@ -430,5 +434,86 @@ void command(MAP *Map, Player *P, Stack *Stack, int turnplayer, boolean *endgame
             default :
                 printf("\nInvalid\n\n") ;
         }
+    }
+}
+
+void maincommand(boolean *endgame) {
+    int i, hasilcommand ;
+    boolean endthisturn = false ;
+
+    hasilcommand = 0 ;
+    printf("Masukkan command: ") ;
+    STARTKATACOMMAND() ;
+
+    boolean valid ;
+    valid = true ;
+    for (i = 0; i < CKata.Length; i++) {
+        if (CKata.TabKata[i + 1] != newgame[i]) {
+            valid = false ;
+        }
+    }
+    if (valid) {
+        ADVKATA() ;
+        for (i = 0; i < CKata.Length; i++) {
+            if (CKata.TabKata[i + 1] != newgame[i + 3]) {
+                valid = false ;
+            }
+        }
+    }
+    if (valid) {
+        hasilcommand = 1 ;
+    }
+
+    valid = true ;
+    for (i = 0; i < CKata.Length; i++) {
+        if (CKata.TabKata[i + 1] != exitgame[i]) {
+            valid = false ;
+        }
+    }
+    if (valid) {
+        hasilcommand = 2 ;
+    }
+
+    valid = true ;
+    for (i = 0; i < CKata.Length; i++) {
+        if (CKata.TabKata[i + 1] != loadgame[i]) {
+            valid = false ;
+        }
+    }
+    if (valid) {
+        ADVKATA() ;
+        for (i = 0; i < CKata.Length; i++) {
+            if (CKata.TabKata[i + 1] != loadgame[i + 4]) {
+                valid = false ;
+            }
+        }
+    }
+    if (valid) {
+        hasilcommand = 3 ;
+    }
+
+    switch(hasilcommand) {
+        // NEW GAME
+        case 1 : ;
+            printf("\n") ;
+            *endgame = false ;
+            break ;
+
+        // EXIT    
+        case 2 : ;
+            printf("\n") ;
+            *endgame = true ;
+            break ;
+
+        // LOAD GAME
+        case 3 : ;
+            printf("\nLoad game tidak diimplementasikan :D\n\n") ;
+            *endgame = false ;
+            break ;
+
+        // INPUT SALAH
+        default :
+            printf("\nInvalid\n\n") ;
+            *endgame = false ;
     }
 }

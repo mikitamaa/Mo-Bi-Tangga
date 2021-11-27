@@ -103,4 +103,11 @@ int getPlayerPosition(Player P, char *uName);
  Fungsi untuk mendapatkan informasi mengenai username yang dijadikan parameter
  mengenai posisi player;
 */
+
+void PeringkatPlayer(Player * P) ;
+/*
+ Prosedur untuk menuliskan peringkat player berdasarkan posisi
+  I.S. array Player.pos dan Player.uName sembarang
+  F.S. menuliskan peringkat player berdasarkan posisi
+*/
 #endif

@@ -22,7 +22,7 @@ extern Kata CKata;
 void IgnoreBlank();
 
 void SalinKata();
-          
+
 void STARTKATA();
 
 void STARTKATACOMMAND();
