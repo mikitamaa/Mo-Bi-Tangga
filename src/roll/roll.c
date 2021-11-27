@@ -1,5 +1,5 @@
-#include "map.h"
-#include "Player.h"
+#include "../map/map.h"
+#include "../player/player.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>

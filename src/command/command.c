@@ -1,9 +1,9 @@
-#include "command.h"
-#include "map.h"
-#include "roll.h"
-#include "player.h"
-#include "skill.h"
-#include "stack.h"
+#include "../command/command.h"
+#include "../map/map.h"
+#include "../roll/roll.h"
+#include "../player/player.h"
+#include "../skill/skill.h"
+#include "../stack/stack.h"
 #include <stdio.h>
 #include <string.h>
 

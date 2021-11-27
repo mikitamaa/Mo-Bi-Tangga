@@ -1,19 +1,19 @@
-#include "command.h"
-#include "command.c"
-#include "map.h"
-#include "map.c"
-#include "roll.h"
-#include "roll.c"
-#include "player.h"
-#include "player.c"
-#include "skill.h"
-#include "skill.c"
-#include "stack.h"
-#include "stack.c"
-#include "mesin_kar.h"
-#include "mesin_kar.c"
-#include "mesin_kata.h"
-#include "mesin_kata.c"
+#include "../command/command.h"
+#include "../command/command.c"
+#include "../map/map.h"
+#include "../map/map.c"
+#include "../roll/roll.h"
+#include "../roll/roll.c"
+#include "../player/player.h"
+#include "../player/player.c"
+#include "../skill/skill.h"
+#include "../skill/skill.c"
+#include "../stack/stack.h"
+#include "../stack/stack.c"
+#include "../mesin_kar/mesin_kar.h"
+#include "../mesin_kar/mesin_kar.c"
+#include "../mesin_kata/mesin_kata.h"
+#include "../mesin_kata/mesin_kata.c"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -72,10 +72,16 @@ int main () {
     printf("                   +****+-                                             :.                 \n");
     printf("\n");
 
+    // Program akan menampilkan main menu.
+    // Jika pemain memilih exit atau load game, program akan dihentikan (endgame = true).
     boolean endgame = false ;
     maincommand(&endgame) ;
 
+    // Jika tidak endgame maka permainan akan dimulai.
     if (!endgame) {
+
+        // Dibuat sebuah looping untuk memastikan input user
+        // untuk jumlah player tepat, yaitu 2 sampai 4 pemain.
         boolean jumlahpemainvalid = false ;
         int jumlahpemain ; 
         while (!jumlahpemainvalid) {
@@ -89,36 +95,52 @@ int main () {
             }
             printf("\n") ;
         }
+
+        // Diinisialisasi sebuah ADT Player P.
         Player P ;
+        // Membuat list Player dengan jumlah player sebanyak input user.
         createEmptyPlayerList(&P) ;
         addPlayer(&P, jumlahpemain) ;
 
         printf("\n") ;
 
+        // Diinisialisasi sebuah ADT MAP Map.
         MAP Map ;
+        // File konfigurasi dibaca dan seluruh informasi akan disimpan pada Map. 
         KonfigurasiToMap(&Map) ;
 
+        // Diinisialisasi sebuah ADT Stack Stack.
         Stack Stack ;
+        // Membuat sebuah stack kosong.
         CreateEmptyStack(&Stack) ;
 
-        // Game akan terus berjalan hingga ada pemain yang menang (endgame = true)
+
+        // Diinisialisasi sebuah variabel untuk menghitung ronde dari game.
         boolean endronde = false ;
         int jumlahronde = 1 ;
+
+        // State permainan paling awal sebelum ada player yang melakukan aksi apapun akan disimpan.
         Push(&Stack, &P) ;
+
+        // Dibuat sebuah looping untuk setiap ronde baru pada permainan hingga permainan selesai.
         while (!endgame) {
             int i = 1;
             endronde = false ;
             printf("-- Ronde ke-%d --\n\n", jumlahronde) ;
 
-            // Setiap player mendapatkan turn pada sebuah ronde
+            // Setiap player mendapatkan turn pada sebuah ronde.
             while (!endronde && i <= jumlahpemain) {
                 printf("-- Giliran %s --\n\n", P.uName[i]) ;
+
+                // Setiap player akan mendapatkan sebuah skill acak pada awal mula gilirannya.
                 draw(&P, i, 0) ;
 
-                // Menuliskan Map setiap awal giliran
+                // Menuliskan Map dan posisi setiap pemain setiap awal giliran sebuah pemain. 
                 for (int imap = 1; imap <= P.Neff; imap++) {
                         printf("%s\t", P.uName[imap]) ;
                         printf(" : ") ;
+
+                        // Petak posisi pemain akan ditandai dengan '*'.
                         for (int jmap = 1; jmap <= Map.PanjangMap; jmap++) {
                             if (P.pos[imap] == jmap) {
                                 printf("*") ;
@@ -127,26 +149,41 @@ int main () {
                                 printf("%c", Map.TabMap[jmap].IsiPetak) ;
                             }
                         }
+
+                        // Posisi pemain akan ditampilkan pada ujung map.
                         printf(" %d", P.pos[imap]) ;
                         printf("\n") ;
                     }
                 printf("\n") ;
 
+                // Setiap player akan melakukan command pada gilirannya.
+                // Beberapa command memiliki restriction tertentu,
+                // seperti endturn yang dapat dilakukan hanya setelah player melakukan roll,
+                // atau roll yang hanya dapat dilakukan sekali setiap giliran pemain.
                 command(&Map, &P, &Stack, i, &endgame, &endronde, &jumlahronde) ;
-                i++ ;
-                
+                i++ ;    
             }
+
+            // Pada akhir ronde, seluruh pemain akan dinyatakan belum
+            // melakukan roll untuk mempersiapkan ronde selanjutnya.
             for (i = 1; i <= P.Neff; i++) {
                 P.isUdahRoll[i] = false ;
             }
+
+            // jumlah ronde bertambah dan state dari permainan 
+            // (state dari para pemain) akan disimpan pada stack.
             jumlahronde++ ;
             printf("\n") ;
             Push(&Stack, &P) ;
         }
+
+        // Pada akhir permainan, peringkat dari seluruh pemain akan ditampilkan berdasarkan posisi.
         printf("-- Peringkat Pemain --\n") ;
         PeringkatPlayer(&P) ;
         printf("\n") ;
     }
+
+    // Jika permainan tidak dilakukan, program akan menuliskan sebuah pesan dan menutup program. 
     else {
         printf("Sampai jumpa lagi.\n") ;
     }

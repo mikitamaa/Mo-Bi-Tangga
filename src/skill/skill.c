@@ -1,5 +1,5 @@
-#include "Player.h"
-#include "skill.h"
+#include "../player/player.h"
+#include "../skill/skill.h"
 #include <stdio.h>
 #include <time.h>
 

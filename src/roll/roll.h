@@ -1,8 +1,8 @@
 #ifndef __ROLL_H__
 #define __ROLL_H__
 
-#include "map.h"
-#include "Player.h"
+#include "../map/map.h"
+#include "../player/player.h"
 
 int HasilRoll(MAP Map, Player P, int i);
 /* 

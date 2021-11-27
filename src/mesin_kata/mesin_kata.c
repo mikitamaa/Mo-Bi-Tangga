@@ -1,6 +1,6 @@
-#include "mesin_kata.h"
-#include "mesin_kar.h"
-#include "boolean.h"
+#include "../mesin_kata/mesin_kata.h"
+#include "../mesin_kar/mesin_kar.h"
+#include "../boolean/boolean.h"
 #include <stdio.h>
 
 boolean EndKata ;

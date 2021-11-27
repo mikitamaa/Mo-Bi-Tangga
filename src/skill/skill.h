@@ -1,8 +1,8 @@
 #ifndef skill_H
 #define skill_H
 
-#include "boolean.h"
-#include "Player.h"
+#include "../boolean/boolean.h"
+#include "../player/player.h"
 
 #define Nil NULL
 

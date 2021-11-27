@@ -1,11 +1,11 @@
 #ifndef __COMMAND_H__
 #define __COMMAND_H__
 
-#include "mesin_kar.h"
-#include "mesin_kata.h"
-#include "map.h"
-#include "player.h"
-#include "stack.h"
+#include "../mesin_kar/mesin_kar.h"
+#include "../mesin_kata/mesin_kata.h"
+#include "../map/map.h"
+#include "../player/player.h"
+#include "../stack/stack.h"
 
 char skill[5] = {'S','K','I','L','L'} ;                 //1
 char map[3] = {'M','A','P'} ;                           //2

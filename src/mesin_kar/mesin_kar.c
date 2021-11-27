@@ -1,7 +1,7 @@
 /* File: mesinkar.c */
 /* Implementasi Mesin Karakter */
 
-#include "mesin_kar.h"
+#include "../mesin_kar/mesin_kar.h"
 #include <stdio.h>
 
 char CC;
