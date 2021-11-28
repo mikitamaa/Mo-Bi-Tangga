@@ -760,6 +760,6 @@ void maincommand(boolean *endgame) {
         // dan permainan akan di-set ke akhir permainan.
         default :
             printf("\nInvalid\n\n") ;
-            *endgame = false ;
+            *endgame = true ;
     }
 }
