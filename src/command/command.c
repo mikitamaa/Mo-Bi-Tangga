@@ -138,7 +138,7 @@ void command(MAP *Map, Player *P, Stack *Stack, int turnplayer, boolean *endgame
                         printf("\n") ;
                         if (activate != 0)
                         {
-                            if (activate > jumlahSkill(skills(*P)[turnplayer]))
+                            if (activate > jumlahSkill(skills(*P)[turnplayer])) // Validator input skill
                             {
                                 printf("Skill mu tidak sebanyak itu, Hey! Pakai yang ada!\n");
                             }
@@ -146,7 +146,7 @@ void command(MAP *Map, Player *P, Stack *Stack, int turnplayer, boolean *endgame
                             {
                                 if (Id(Search(&P->skills[turnplayer], activate)) == 2)
                                 {
-                                    if (P->isCermin[turnplayer] == false)
+                                    if (P->isCermin[turnplayer] == false) // Validator cermin pengganda
                                     {
                                         printf("%s mengaktifkan ", uName(*P)[turnplayer]);
                                         printOneSkill(&skills(*P)[turnplayer], activate);
@@ -158,7 +158,7 @@ void command(MAP *Map, Player *P, Stack *Stack, int turnplayer, boolean *endgame
                                 } 
                                 else if (Id(Search(&P->skills[turnplayer], activate)) == 3 || Id(Search(&P->skills[turnplayer], activate)) == 4)
                                 {
-                                    if (P->isSenPem[turnplayer] == false && P->isSenPeng[turnplayer] == false)
+                                    if (P->isSenPem[turnplayer] == false && P->isSenPeng[turnplayer] == false) // Validator senter
                                     {
                                         printf("%s mengaktifkan ", uName(*P)[turnplayer]);
                                         printOneSkill(&skills(*P)[turnplayer], activate);
@@ -168,34 +168,51 @@ void command(MAP *Map, Player *P, Stack *Stack, int turnplayer, boolean *endgame
                                         printf("Kamu sudah memakai Senter Pembesar atau Pengecil turn ini.\n");
                                     }
                                 } 
-                                else if (Id(Search(&P->skills[turnplayer], activate)) == 7)
+                                else if (Id(Search(&P->skills[turnplayer], activate)) == 7) // Case Mesin Waktu
                                 {
                                     printf("%s mengaktifkan ", uName(*P)[turnplayer]);
                                     printOneSkill(&skills(*P)[turnplayer], activate);
-                                    mesinWaktu(P, turnplayer, Map, Target(Search(&P->skills[turnplayer], activate)), endgame, endronde);
+                                    mesinWaktu(P, turnplayer, Map, Target(Search(&P->skills[turnplayer], activate)));
                                     discard(&skills(*P)[turnplayer], activate);
-                                    if ((*P).pos[turnplayer] == (*Map).PanjangMap) {
-                                        endthisturn = true ;
-                                        printf("%s telah mencapai ujung.\n", (*P).uName[turnplayer]) ;
-                                        printf("Pemenang game ini adalah %s.\n", (*P).uName[turnplayer]) ;
-                                        *endgame = true ;
-                                        *endronde = true ;
+                                    boolean suddWin = false;
+                                    for (int i = 1; i < 4; i++)
+                                    {                  
+                                        if ((*P).pos[i] == (*Map).PanjangMap) {
+                                            endthisturn = true ;
+                                            printf("%s telah mencapai ujung.\n", (*P).uName[i]) ;
+                                            printf("Pemenang game ini adalah %s.\n", (*P).uName[i]) ;
+                                            *endgame = true ;
+                                            *endronde = true ;
+                                            suddWin = true;
+                                            break;
+                                        }
+                                    }
+                                    if (suddWin == true) // Cek suddWin (apakah ter-teleport ke petak 20), kalau ya, maka game selesai
+                                    {
                                         break;
                                     }
-
+                                    
                                 }
-                                else if (Id(Search(&P->skills[turnplayer], activate)) == 8)
+                                else if (Id(Search(&P->skills[turnplayer], activate)) == 8) // Case Baling Jambu
                                 {
                                     printf("%s mengaktifkan ", uName(*P)[turnplayer]);
                                     printOneSkill(&skills(*P)[turnplayer], activate);
-                                    balingJambu(P, turnplayer, Map, Target(Search(&P->skills[turnplayer], activate)), endgame, endronde);
+                                    balingJambu(P, turnplayer, Map, Target(Search(&P->skills[turnplayer], activate)));
                                     discard(&skills(*P)[turnplayer], activate);
-                                    if ((*P).pos[turnplayer] == (*Map).PanjangMap) {
-                                        endthisturn = true ;
-                                        printf("%s telah mencapai ujung.\n", (*P).uName[turnplayer]) ;
-                                        printf("Pemenang game ini adalah %s.\n", (*P).uName[turnplayer]) ;
-                                        *endgame = true ;
-                                        *endronde = true ;
+                                    boolean suddWin = false;
+                                    for (int i = 1; i < 4; i++){
+                                        if ((*P).pos[i] == (*Map).PanjangMap) {
+                                            endthisturn = true ;
+                                            printf("%s telah mencapai ujung.\n", (*P).uName[i]) ;
+                                            printf("Pemenang game ini adalah %s.\n", (*P).uName[i]) ;
+                                            *endgame = true ;
+                                            *endronde = true ;
+                                            suddWin = true;
+                                            break;
+                                        }
+                                    }
+                                    if (suddWin == true) // Cek suddWin (apakah ter-teleport ke petak 20), kalau ya, maka game selesai
+                                    {
                                         break;
                                     }
                                     
@@ -531,34 +548,6 @@ void command(MAP *Map, Player *P, Stack *Stack, int turnplayer, boolean *endgame
 
             // Jika command merupakan "ENDTURN".
             case 7 :
-                if (jumlahSkill(skills(*P)[turnplayer]) > 10)
-                {
-                    int initSkillTotal = jumlahSkill(skills(*P)[turnplayer]);
-                    for (int i = 0; i < initSkillTotal-10; i++)
-                    {
-                        int skillOrder;
-                        printSkill(P, turnplayer);
-                        printf("Skill kamu melebihi batas maksimal. Pilih Skill untuk dibuang: ");
-                        scanf("%d", &skillOrder) ;
-                        printf("\n") ;
-                        if (skillOrder > 0)
-                        {
-                            if (skillOrder > jumlahSkill(skills(*P)[turnplayer]))
-                            {
-                                printf("Skill mu tidak sebanyak itu, Hey! Pakai yang ada!\n");
-                            }
-                            else
-                            {
-                                discard(&skills(*P)[turnplayer], skillOrder);;
-                            }
-                        }
-                        else
-                        {
-                            printf("Invalid!\n");
-                        }
-                    }
-                }
-
                 // Jika pemain sudah melakukan roll, pemain baru bisa melakukan endturn.
                 if ((*P).isUdahRoll[turnplayer]) {
                     endthisturn = true ;
