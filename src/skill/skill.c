@@ -110,10 +110,21 @@ int randomize(int X)
     srand ( time(NULL) );
     int arr[2];
 
-    arr[0] = rand() % 80;
-    arr[1] = rand() % 80;
+    arr[0] = (rand() % 100) + 1;
+    arr[1] = (rand() % 100) + 1;
 
     return arr[X];
+}
+
+int petakMesinWaktu(){
+    int target = (randomize(0) % 10) + 1;
+    if (target == 0)
+    {
+        target += 1;
+    }
+    
+    
+    return target;
 }
 
 int randomSkill(int X){
@@ -132,9 +143,15 @@ int randomSkill(int X){
     } else if (X>46 && X<=50)
     {
         return 5;
-    } else
+    } else if (X>50 && X<=80)
     {
         return 6;
+    } else if (X>80 && X<=90)
+    {
+        return 7;
+    } else
+    {
+        return 8;
     }
     
 }
@@ -217,6 +234,12 @@ void printOneSkill(lSkill *lS, int skillOrder){
     }  else if (Id(S) == 6)
     {
         printf("Teknologi Gagal\n");
+    }  else if (Id(S) == 7)
+    {
+        printf("%d. Mesin Waktu %d\n", count, Target(S));
+    }  else if (Id(S) == 8)
+    {
+        printf("%d. Baling-Baling Jambu %d\n", count, Target(S));
     }
 }
 
@@ -243,6 +266,12 @@ void printSkill(Player *P, int currentPlayer){
         }  else if (Id(S) == 6)
         {
             printf("%d. Teknologi Gagal\n", count);
+        }  else if (Id(S) == 7)
+        {
+            printf("%d. Mesin Waktu %d\n", count, Target(S));
+        }  else if (Id(S) == 8)
+        {
+            printf("%d. Baling-Baling Jambu %d\n", count, Target(S));
         }
 
         count += 1;
@@ -296,6 +325,133 @@ void mesinPenukarPosisi(Player *P, int currentPlayer){
 
 }
 
+void mesinWaktu(Player *P, int currentPlayer, MAP *Map, int Petak, boolean *endgame, boolean *endronde){
+    boolean validator = false;
+    int targetedPlayer;
+    printf("Masukkan nomor player yang ingin ditarget: ");
+    scanf("%d", &targetedPlayer);
+    while (targetedPlayer == currentPlayer)
+    {
+        printf("Tidak bisa menarget diri sendiri. Masukan nomor player lain: ");
+        scanf("%d", &targetedPlayer);
+    }
+    
+    if (pos(*P)[targetedPlayer] - Petak >= 1)
+    {
+        if ((*Map).TabMap[pos(*P)[targetedPlayer] - Petak].IsiPetak == '.')
+        {
+            pos(*P)[targetedPlayer] = pos(*P)[targetedPlayer] - Petak;
+            printf("%s dipindahkan ke petak %d oleh %s\n", uName(*P)[targetedPlayer], pos(*P)[targetedPlayer], uName(*P)[currentPlayer]);
+            if ((*Map).TabMap[(*P).pos[targetedPlayer]].Teleporter != -1)
+            {
+                printf("%s menemukan teleporter.\n", (*P).uName[targetedPlayer]) ;
+                if ((*P).isImmu[targetedPlayer]) {
+                    printf("%s memiliki imunitas teleport.\n", (*P).uName[targetedPlayer]) ;
+                    printf("Apakah %s ingin teleport (Y/N)? ", (*P).uName[targetedPlayer]) ;
+                    boolean pilihanteleportvalid = false ;
+                    char pilihanteleport ;
+                    while (!pilihanteleportvalid) {
+                        scanf("%c", &pilihanteleport) ;
+                        if (pilihanteleport == 'Y') {
+                            (*P).pos[targetedPlayer] = (*Map).TabMap[(*P).pos[targetedPlayer]].Teleporter ;
+                            printf("%s teleport ke petak %d.\n", (*P).uName[targetedPlayer], (*P).pos[targetedPlayer]) ;
+                            pilihanteleportvalid = true ;
+                        }
+                        else if (pilihanteleport == 'N') {
+                            printf("%s tidak teleport.\n", (*P).uName[targetedPlayer]) ;
+                            (*P).isImmu[targetedPlayer] = false ;
+                            printf("Buff imunitas teleport hilang.\n") ;
+                            pilihanteleportvalid = true ;
+                        }
+                        else {
+                            printf("Pilihan teleport harus Y atau N.\n\n") ;
+                        }
+                    }
+                }
+                else {
+                    printf("%s tidak memiliki imunitas teleport.\n", (*P).uName[targetedPlayer]) ;
+                    (*P).pos[targetedPlayer] = (*Map).TabMap[(*P).pos[targetedPlayer]].Teleporter ;
+                    printf("%s teleport ke petak %d.\n", (*P).uName[targetedPlayer], (*P).pos[targetedPlayer]) ;
+                }
+            }
+            
+        }
+        else
+        {
+            printf("Tidak bisa dipindahkan ke petak tersebut! Skill hangus!");
+        }
+    }
+    else
+    {
+        printf("Tidak bisa dipindahkan ke petak tersebut! Skill hangus!");
+    }
+    
+}
+
+void balingJambu(Player *P, int currentPlayer, MAP *Map, int Petak, boolean *endgame, boolean *endronde){
+    boolean validator = false;
+    int targetedPlayer;
+    printf("Masukkan nomor player yang ingin ditarget: ");
+    scanf("%d", &targetedPlayer);
+    while (targetedPlayer == currentPlayer)
+    {
+        printf("Tidak bisa menarget diri sendiri. Masukan nomor player lain: ");
+        scanf("%d", &targetedPlayer);
+    }
+    
+    
+    if (pos(*P)[targetedPlayer] + Petak <= 20)
+    {
+        if ((*Map).TabMap[pos(*P)[targetedPlayer] + Petak].IsiPetak == '.')
+        {
+            pos(*P)[targetedPlayer] = pos(*P)[targetedPlayer] + Petak;
+            printf("%s dipindahkan ke petak %d oleh %s\n", uName(*P)[targetedPlayer], pos(*P)[targetedPlayer], uName(*P)[currentPlayer]);
+            if ((*Map).TabMap[(*P).pos[targetedPlayer]].Teleporter != -1)
+            {
+                printf("%s menemukan teleporter.\n", (*P).uName[targetedPlayer]) ;
+                if ((*P).isImmu[targetedPlayer]) {
+                    printf("%s memiliki imunitas teleport.\n", (*P).uName[targetedPlayer]) ;
+                    printf("Apakah %s ingin teleport (Y/N)? ", (*P).uName[targetedPlayer]) ;
+                    boolean pilihanteleportvalid = false ;
+                    char pilihanteleport ;
+                    while (!pilihanteleportvalid) {
+                        scanf("%c", &pilihanteleport) ;
+                        if (pilihanteleport == 'Y') {
+                            (*P).pos[targetedPlayer] = (*Map).TabMap[(*P).pos[targetedPlayer]].Teleporter ;
+                            printf("%s teleport ke petak %d.\n", (*P).uName[targetedPlayer], (*P).pos[targetedPlayer]) ;
+                            pilihanteleportvalid = true ;
+                        }
+                        else if (pilihanteleport == 'N') {
+                            printf("%s tidak teleport.\n", (*P).uName[targetedPlayer]) ;
+                            (*P).isImmu[targetedPlayer] = false ;
+                            printf("Buff imunitas teleport hilang.\n") ;
+                            pilihanteleportvalid = true ;
+                        }
+                        else {
+                            printf("Pilihan teleport harus Y atau N.\n\n") ;
+                        }
+                    }
+                }
+                else {
+                    printf("%s tidak memiliki imunitas teleport.\n", (*P).uName[targetedPlayer]) ;
+                    (*P).pos[targetedPlayer] = (*Map).TabMap[(*P).pos[targetedPlayer]].Teleporter ;
+                    printf("%s teleport ke petak %d.\n", (*P).uName[targetedPlayer], (*P).pos[targetedPlayer]) ;
+                }
+            }
+            
+        }
+        else
+        {
+            printf("Tidak bisa dipindahkan ke petak tersebut! Skill hangus!");
+        }
+    }
+    else
+    {
+        printf("Tidak bisa dipindahkan ke petak tersebut! Skill hangus!");
+    }
+    
+}
+// ----------------------------------------------------------------------- Skill Construct ----------------------------------------------------------------------------------- //
 void constructSkill(address S, int id){
     switch (id)
     {
@@ -323,6 +479,16 @@ void constructSkill(address S, int id){
         Id(S) = 6;
         Effect(S) = Nil;
         break;
+    case 7:
+        Id(S) = 7;
+        Target(S) = petakMesinWaktu();
+        Effect(S) = Nil;
+        break;
+    case 8:
+        Id(S) = 8;
+        Target(S) = petakMesinWaktu();
+        Effect(S) = Nil;
+        break;
     default:
         break;
     }
@@ -341,3 +507,4 @@ void copySkill(lSkill origin, lSkill *copy){
     }
     
 }
+

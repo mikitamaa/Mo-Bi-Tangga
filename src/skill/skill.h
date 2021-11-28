@@ -3,6 +3,9 @@
 
 #include "../boolean/boolean.h"
 #include "../player/player.h"
+#include "../map/map.h"
+
+#define Nil NULL
 
 #define Nil NULL
 
@@ -23,6 +26,8 @@ address Search (lSkill *ls, int skillOrder);
 /* Jika tidak ada, mengirimkan Nil */
 int randomize(int X);
 // Mengenerate dan mengembalikan salah satu elemen index ke-X dari array of integer hasil randomize.
+int petakMesinWaktu();
+// Mengembalikan petak random untuk Mesin Waktu dan Baling-Baling Jambu.
 int randomSkill(int X);
 // Mengembalikan Id skill sesuai X.
 void constructSkill(address S, int id);
@@ -53,7 +58,10 @@ void senterPengecilHoki(Player *P, int currentPlayer);
 void mesinPenukarPosisi(Player *P, int currentPlayer);
 /* Menukarkan posisi dua pemain pada map. */
 /* tidak mengaktifkan teleporter. */
-
+void mesinWaktu(Player *P, int currentPlayer, MAP *Map, int Petak, boolean *endgame, boolean *endronde);
+// Membuat pemain lain mundur 1-MaxRoll MAP.
+void balingJambu(Player *P, int currentPlayer, MAP *Map, int Petak, boolean *endgame, boolean *endronde);
+// Membuat pemain lain maju 1-MaxRoll MAP.
 // ----------------------------------------------------------------------- External Purposes -----------------------------------------------------------------------//
 void copySkill(lSkill origin, lSkill *copy);
 

@@ -150,6 +150,35 @@ void command(MAP *Map, Player *P, Stack *Stack, int turnplayer, boolean *endgame
                                         printf("Kamu sudah memakai Senter Pembesar atau Pengecil turn ini.\n");
                                     }
                                 } 
+                                else if (Id(Search(&P->skills[turnplayer], activate)) == 7)
+                                {
+                                    printf("%s mengaktifkan ", uName(*P)[turnplayer]);
+                                    printOneSkill(&skills(*P)[turnplayer], activate);
+                                    mesinWaktu(P, turnplayer, Map, Target(Search(&P->skills[turnplayer], activate)), endgame, endronde);
+                                    if ((*P).pos[turnplayer] == (*Map).PanjangMap) {
+                                        endthisturn = true ;
+                                        printf("%s telah mencapai ujung.\n", (*P).uName[turnplayer]) ;
+                                        printf("Pemenang game ini adalah %s.\n", (*P).uName[turnplayer]) ;
+                                        *endgame = true ;
+                                        *endronde = true ;
+                                        break;
+                                    }
+
+                                }
+                                else if (Id(Search(&P->skills[turnplayer], activate)) == 8)
+                                {
+                                    printf("%s mengaktifkan ", uName(*P)[turnplayer]);
+                                    printOneSkill(&skills(*P)[turnplayer], activate);
+                                    balingJambu(P, turnplayer, Map, Target(Search(&P->skills[turnplayer], activate)), endgame, endronde);
+                                    if ((*P).pos[turnplayer] == (*Map).PanjangMap) {
+                                        endthisturn = true ;
+                                        printf("%s telah mencapai ujung.\n", (*P).uName[turnplayer]) ;
+                                        printf("Pemenang game ini adalah %s.\n", (*P).uName[turnplayer]) ;
+                                        *endgame = true ;
+                                        *endronde = true ;
+                                        break;
+                                    }
+                                }
                                 else
                                 {
                                     printf("%s mengaktifkan ", uName(*P)[turnplayer]);
@@ -357,14 +386,31 @@ void command(MAP *Map, Player *P, Stack *Stack, int turnplayer, boolean *endgame
                 if (jumlahSkill(skills(*P)[turnplayer]) > 10)
                 {
                     int initSkillTotal = jumlahSkill(skills(*P)[turnplayer]);
-                    for (int i = 0; i < initSkillTotal; i++)
+                    for (int i = 0; i < initSkillTotal-10; i++)
                     {
                         int skillOrder;
                         printSkill(P, turnplayer);
                         printf("Skill kamu melebihi batas maksimal. Pilih Skill untuk dibuang: ");
-                        discard(&skills(*P)[turnplayer], skillOrder);
-                    }
+                        scanf("%d", &skillOrder) ;
+                        printf("\n") ;
+                        if (skillOrder > 0)
+                        {
+                            if (skillOrder > jumlahSkill(skills(*P)[turnplayer]))
+                            {
+                                printf("Skill mu tidak sebanyak itu, Hey! Pakai yang ada!\n");
+                            }
+                            else
+                            {
+                                discard(&skills(*P)[turnplayer], skillOrder);;
+                            }
+                            
+                        }
+                        else
+                        {
+                            printf("Invalid!\n");
+                        }
                         
+                    }
                 }
                 if ((*P).isUdahRoll[turnplayer]) {
                     endthisturn = true ;
