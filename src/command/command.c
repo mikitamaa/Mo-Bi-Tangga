@@ -155,6 +155,7 @@ void command(MAP *Map, Player *P, Stack *Stack, int turnplayer, boolean *endgame
                                     printf("%s mengaktifkan ", uName(*P)[turnplayer]);
                                     printOneSkill(&skills(*P)[turnplayer], activate);
                                     mesinWaktu(P, turnplayer, Map, Target(Search(&P->skills[turnplayer], activate)), endgame, endronde);
+                                    discard(&skills(*P)[turnplayer], activate);
                                     if ((*P).pos[turnplayer] == (*Map).PanjangMap) {
                                         endthisturn = true ;
                                         printf("%s telah mencapai ujung.\n", (*P).uName[turnplayer]) ;
@@ -170,6 +171,7 @@ void command(MAP *Map, Player *P, Stack *Stack, int turnplayer, boolean *endgame
                                     printf("%s mengaktifkan ", uName(*P)[turnplayer]);
                                     printOneSkill(&skills(*P)[turnplayer], activate);
                                     balingJambu(P, turnplayer, Map, Target(Search(&P->skills[turnplayer], activate)), endgame, endronde);
+                                    discard(&skills(*P)[turnplayer], activate);
                                     if ((*P).pos[turnplayer] == (*Map).PanjangMap) {
                                         endthisturn = true ;
                                         printf("%s telah mencapai ujung.\n", (*P).uName[turnplayer]) ;
@@ -178,6 +180,7 @@ void command(MAP *Map, Player *P, Stack *Stack, int turnplayer, boolean *endgame
                                         *endronde = true ;
                                         break;
                                     }
+                                    
                                 }
                                 else
                                 {
