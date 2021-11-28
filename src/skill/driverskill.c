@@ -127,7 +127,7 @@ int main(){
     printf("\nPosisi Player 1: %d\n", pos(P)[1]);
     printf("Posisi Player 2: %d\n", pos(P)[2]);
     printf("\n");
-//-------------------------------- Pengujian copySkill --------------------------------//
+//-------------------------------- Pengujian copySkill dan Activate --------------------------------//
 printf("===== Copy Skill =====\n");
 printf("\nSkill Player 1:\n");
 printSkill(&P, 1);
@@ -140,4 +140,10 @@ printf("\nSkill Player 1:\n");
 printSkill(&P, 1);
 printf("\nSkill Player 2:\n");
 printSkill(&P, 2);
+    
+printf("===== Activate =====\n");
+int activated;
+printf("Masukkan nomor skill yang mau diaktifkan");
+scanf("%d", &activated); // Masukkan angka 1 
+Activate(&P, &skills(P)[1], activated, 1); // Mengaktifkan skill 1 pada player 2 Jika skill bukan mesinWaktu atau balingJambu.
 }
