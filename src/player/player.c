@@ -18,7 +18,7 @@ void addPlayer(Player *P, int n)
  I.S array Player.uName, Player.pos, Player.isTelep,
     Player.isImmu, Player.skills kosong dan Neff berisi 0
  F.S array Player.uName, Player.pos, Player.isTelep, Player.isImmu, Player.skills sebanyak n
-    terisi inputan dan Neff menjadi n
+    terisi inputan dan Player.Neff menjadi n
 */
 {
     for (int i = 1; i <= n; i++)
@@ -28,6 +28,8 @@ void addPlayer(Player *P, int n)
         int j = 1;
         while (j <= n)
         {
+            /* Melakukan komparasi string yang barusan diamsukkan dengan array of character di array Player.uName,
+            apabila hasil komparasinya sama dan indeks j dan i berbeda, maka user diminta memasukkan username lain */
             if (strcmp(uName(*P)[i], uName(*P)[j]) == 0 && j != i)
             {
                 printf("Username %s sudah digunakan player lain!\n", uName(*P)[i]);
@@ -36,9 +38,11 @@ void addPlayer(Player *P, int n)
             }
             else
             {
+                /* Apabila hasil komparasinya berbeda, dilanjutkan dengan mengecek array array of character di array Player.uName berikutnya */
                 j++;
             }
         }
+        /* Mengeset value default */
         pos(*P)[i] = 1;
         isTelep(*P)[i] = false;
         isImmu(*P)[i] = false;
@@ -48,6 +52,7 @@ void addPlayer(Player *P, int n)
         isUdahRoll(*P)[i] = false;
         skills(*P)[i] = Nil;
     }
+    /*Mengeset Neff dengan parameter n dimana n adalah jumlah pemain */
     Neff(*P) = n;
 }
 
@@ -61,8 +66,10 @@ int getPlayerIdx(Player P, char *nameSearch)
     int idxP = IdxUndef;
     while (i <= IdxMax)
     {
+        /* Melakukan komparasi string input dengan array of character di array Player.uName */
         if (strcmp(nameSearch, P.uName[i]) != 0)
         {
+            /* Apabila komparasi tersebut tidak sama, akan dilakukan increment indes i */
             i++;
         }
         else

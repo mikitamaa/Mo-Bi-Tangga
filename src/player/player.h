@@ -14,7 +14,7 @@ typedef int ElType;
 typedef struct listSkillNode *address;
 typedef address lSkill;
 
-/* Player menggunakan array */
+/* Membuat ADT Player Menggunakan Array */
 typedef struct
 {
     int Neff;
