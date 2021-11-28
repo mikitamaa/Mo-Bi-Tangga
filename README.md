@@ -9,6 +9,8 @@ Kelompok ini terdiri dari :
 - 18220108 - Muhammad Furqan Alfuady
 - 18220110 - Muhammad Rizki Pratama
 
+Untuk menjalankan program ini dalam Linux, ubah format pada file txt dari CRLF menjadi LF.
+
 ## Table of Contents
 * [Informasi Umum](#informasi-umum)
 * [Teknologi yang Digunakan](#teknologi-yang-digunakan)
