@@ -12,22 +12,18 @@ Kelompok ini terdiri dari :
 ## Table of Contents
 * [Informasi Umum](#informasi-umum)
 * [Teknologi yang Digunakan](#teknologi-yang-digunakan)
-* [Features](#features)
 * [Screenshots](#screenshots)
 
 
 ## Informasi Umum
 
-Mobitangga Game merupakan game yang memiliki konsep yang menyerupai  permainan ular tangga dimana para pemain (2 - 4 orang) akan berlomba untuk mencapai finish terlebih dahulu dari sebuah papan satu dimensi yang memiliki panjang N. Para pemain akan memulai dari kotak 1 menuju kotak terakhir.<br />
+Mobitangga Game merupakan game yang memiliki konsep yang menyerupai  permainan ular tangga dimana para pemain (2 - 4 orang) akan berlomba untuk mencapai finish terlebih dahulu dari sebuah papan satu dimensi yang memiliki panjang N. Para pemain akan memulai dari kotak 1 menuju kotak terakhir.<br /> <br />
 Pada saat permainan dimulai, pemain akan berjalan berdasarkan angka dari lemparan dadu. Pemain akan dilengkapi dengan beberapa skill yang didapatkan secara acak pada setiap putaran dan dapat digunakan selama giliran pemain masih berlangsung. Pada map permainan ini, terdapat teleporter yang dapat memindahkan pemain ke tempat lain. Pemenang dari permainan ini adalah pemain yang pertama kali mencapai finish. Permainan akan berakhir saat telah ditemukan pemenang.<br />
 <br />
 
 
 ## Teknologi yang Digunakan
-
-
-## Features
-
+- C Programming Language
 
 ## Screenshots
 <!-- If you have screenshots you'd like to share, include them here. -->
