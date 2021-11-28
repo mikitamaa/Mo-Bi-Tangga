@@ -58,9 +58,9 @@ void senterPengecilHoki(Player *P, int currentPlayer);
 void mesinPenukarPosisi(Player *P, int currentPlayer);
 /* Menukarkan posisi dua pemain pada map. */
 /* tidak mengaktifkan teleporter. */
-void mesinWaktu(Player *P, int currentPlayer, MAP *Map, int Petak, boolean *endgame, boolean *endronde);
+void mesinWaktu(Player *P, int currentPlayer, MAP *Map, int Petak);
 // Membuat pemain lain mundur 1-MaxRoll MAP.
-void balingJambu(Player *P, int currentPlayer, MAP *Map, int Petak, boolean *endgame, boolean *endronde);
+void balingJambu(Player *P, int currentPlayer, MAP *Map, int Petak);
 // Membuat pemain lain maju 1-MaxRoll MAP.
 // ----------------------------------------------------------------------- External Purposes -----------------------------------------------------------------------//
 void copySkill(lSkill origin, lSkill *copy);

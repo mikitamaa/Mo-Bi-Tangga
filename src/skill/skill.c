@@ -12,6 +12,8 @@ Identifier Skill
 4 = Senter Pengecil Hoki
 5 = Mesin Penukar Posisi
 6 = Teknologi Gagal
+7 = Mesin Waktu
+8 = Baling-Baling Jambu
  */
 
 // ----------------------------------------------------------------------- Generic Purpose Use ----------------------------------------------------------------------------------- //
@@ -158,12 +160,18 @@ int randomSkill(int X){
 
 void draw(Player *P, int currentPlayer, int randomizer){
 // Menambahkan 1 Skill secara random ke lSkill Player yang sedang bermain di giliran ini.
-    address S;
-    S = newSkillNode();
-    int identifier = randomSkill(randomize(randomizer));
-    Id(S) = identifier;
-    constructSkill(S, Id(S));
-    insertSkill(&skills(*P)[currentPlayer], S);
+    if (jumlahSkill(skills(*P)[currentPlayer]) < 10)
+    {
+        address S;
+        S = newSkillNode();
+        int identifier = randomSkill(randomize(randomizer));
+        Id(S) = identifier;
+        constructSkill(S, Id(S));
+        insertSkill(&skills(*P)[currentPlayer], S);
+    } else
+    {
+        printf("Jumlah skill sudah maksimal!\n");
+    }
 }
 
 void discard(lSkill *lS, int skillOrder){
@@ -325,7 +333,7 @@ void mesinPenukarPosisi(Player *P, int currentPlayer){
 
 }
 
-void mesinWaktu(Player *P, int currentPlayer, MAP *Map, int Petak, boolean *endgame, boolean *endronde){
+void mesinWaktu(Player *P, int currentPlayer, MAP *Map, int Petak){
     boolean validator = false;
     int targetedPlayer;
     printf("Masukkan nomor player yang ingin ditarget: ");
@@ -378,17 +386,17 @@ void mesinWaktu(Player *P, int currentPlayer, MAP *Map, int Petak, boolean *endg
         }
         else
         {
-            printf("Tidak bisa dipindahkan ke petak tersebut! Skill hangus!");
+            printf("Tidak bisa dipindahkan ke petak tersebut! Skill hangus!\n");
         }
     }
     else
     {
-        printf("Tidak bisa dipindahkan ke petak tersebut! Skill hangus!");
+        printf("Tidak bisa dipindahkan ke petak tersebut! Skill hangus!\n");
     }
     
 }
 
-void balingJambu(Player *P, int currentPlayer, MAP *Map, int Petak, boolean *endgame, boolean *endronde){
+void balingJambu(Player *P, int currentPlayer, MAP *Map, int Petak){
     boolean validator = false;
     int targetedPlayer;
     printf("Masukkan nomor player yang ingin ditarget: ");
@@ -442,12 +450,12 @@ void balingJambu(Player *P, int currentPlayer, MAP *Map, int Petak, boolean *end
         }
         else
         {
-            printf("Tidak bisa dipindahkan ke petak tersebut! Skill hangus!");
+            printf("Tidak bisa dipindahkan ke petak tersebut! Skill hangus!\n");
         }
     }
     else
     {
-        printf("Tidak bisa dipindahkan ke petak tersebut! Skill hangus!");
+        printf("Tidak bisa dipindahkan ke petak tersebut! Skill hangus!\n");
     }
     
 }
