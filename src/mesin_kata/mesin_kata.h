@@ -1,6 +1,3 @@
-/* File: mesinkata.h */
-/* Definisi Mesin Kata: Model Akuisisi Versi I */
-
 #ifndef __MESINKATA_H__
 #define __MESINKATA_H__
 
@@ -11,22 +8,39 @@
 #define BLANK ' '
 
 typedef struct {
-  char TabKata[NMax+1]; /* container penyimpan kata, indeks yang dipakai [1..NMax] */
-    int Length;
+    char TabKata[NMax+1] ; 
+    int Length ;
 } Kata;
 
-/* State Mesin Kata */
 extern boolean EndKata;
 extern Kata CKata;
 
-void IgnoreBlank();
+// Mesin kata akan mengabaikan seluruh ' ' dan '\n', membaca karakter selanjutnya selama bukan EOP.
+// I.S. CC sembarang.
+// F.S. CC karakter selanjutnya selama bukan EOP.
+void IgnoreBlank() ;
 
-void SalinKata();
+// Mesin kata akan menyimpan sebuah "Kata", setiap kata dipisahkan oleh ' ' atau '\n'.
+// I.S. CC sembarang.
+// F.S. CKata.TabKata mengandung karakter-karakter dari sebuah kata, CKata.Length berupa panjang kata.
+void SalinKata() ;
 
-void STARTKATA();
+// Mesin kata akan membaca kata pertama dari file "konfigurasi.txt".
+// I.S. File konfigurasi.
+// F.S. CKata.TabKata menyimpan karakter-karakter yang membentuk kata pertama pada file "konfigurasi.txt",
+//      CKata.Length berupa panjang kata.
+void STARTKATA() ;
 
-void STARTKATACOMMAND();
+// Mesin kata akan membaca kata pertama dari input user.
+// I.S. Input user.
+// F.S. CKata.TabKata menyimpan karakter-karakter yang membentuk kata pertama dari input user,
+//      CKata.Length berupa panjang kata.
+void STARTKATACOMMAND() ;
 
-void ADVKATA();
+// Mesin kata akan memroses kata selanjutnya.
+// I.S. Kata sembarang.
+// F.S. CKata.TabKata menyimpan karakter-karakter yang membentuk kata pertama dari input user,
+//      CKata.Length berupa panjang kata.
+void ADVKATA() ;
 
 #endif
