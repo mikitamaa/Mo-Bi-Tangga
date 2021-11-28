@@ -236,10 +236,10 @@ void printOneSkill(lSkill *lS, int skillOrder){
         printf("Teknologi Gagal\n");
     }  else if (Id(S) == 7)
     {
-        printf("%d. Mesin Waktu %d\n", count, Target(S));
+        printf("Mesin Waktu %d\n", Target(S));
     }  else if (Id(S) == 8)
     {
-        printf("%d. Baling-Baling Jambu %d\n", count, Target(S));
+        printf("Baling-Baling Jambu %d\n", Target(S));
     }
 }
 
