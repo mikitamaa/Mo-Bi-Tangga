@@ -753,7 +753,7 @@ void maincommand(boolean *endgame) {
 
             // Hanya menuliskan pesan karena kita tidak membuat command load game :D
             printf("\nGabisa load game hehe :D\n\n") ;
-            *endgame = false ;
+            *endgame = true ;
             break ;
 
         // Jika input user salah, command tidak membaca command apapun, mengirimkan pesan, 
