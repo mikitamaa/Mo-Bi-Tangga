@@ -12,7 +12,6 @@ Kelompok ini terdiri dari :
 ## Table of Contents
 * [Informasi Umum](#informasi-umum)
 * [Teknologi yang Digunakan](#teknologi-yang-digunakan)
-* [Screenshots](#screenshots)
 
 
 ## Informasi Umum
@@ -24,6 +23,3 @@ Pada saat permainan dimulai, pemain akan berjalan berdasarkan angka dari lempara
 
 ## Teknologi yang Digunakan
 - C Programming Language
-
-## Screenshots
-<!-- If you have screenshots you'd like to share, include them here. -->
