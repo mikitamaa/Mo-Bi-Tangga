@@ -91,7 +91,6 @@ boolean isPlayerSenterPengecil(Player P, char *uName);
 /*
  Fungsi untuk mendapatkan informasi mengenai username yang dijadikan parameter
  mengenai apakah player tersebut memakai senter pengecil atau tidak
-
 */
 boolean isPlayerCerminPengganda(Player P, char *uName);
 /*
@@ -104,7 +103,7 @@ int getPlayerPosition(Player P, char *uName);
  mengenai posisi player;
 */
 
-void PeringkatPlayer(Player * P) ;
+void PeringkatPlayer(Player *P);
 /*
  Prosedur untuk menuliskan peringkat player berdasarkan posisi
   I.S. array Player.pos dan Player.uName sembarang

@@ -4,11 +4,22 @@
 #include <stdio.h>
 
 void createEmptyPlayerList(Player *P)
+/*
+ I.S. array P sembarang
+ F.S. array P kosong
+*/
 {
     (*P).Neff = 0;
 }
 
 void addPlayer(Player *P, int n)
+/*
+ Prosedur untuk membuat list player sebanyak n pemain
+ I.S array Player.uName, Player.pos, Player.isTelep,
+    Player.isImmu, Player.skills kosong dan Neff berisi 0
+ F.S array Player.uName, Player.pos, Player.isTelep, Player.isImmu, Player.skills sebanyak n
+    terisi inputan dan Neff menjadi n
+*/
 {
     for (int i = 1; i <= n; i++)
     {
@@ -41,6 +52,10 @@ void addPlayer(Player *P, int n)
 }
 
 int getPlayerIdx(Player P, char *nameSearch)
+/*
+ Fungsi untuk mereturn index player dalam array uName dengan uName sebagai parameter input
+ Apabila input tidak terdapat di list uName, maka akan mereturn IdxUndef
+*/
 {
     int i = IdxMin;
     int idxP = IdxUndef;
@@ -60,6 +75,10 @@ int getPlayerIdx(Player P, char *nameSearch)
 }
 
 boolean isPlayerTeleported(Player P, char *uName)
+/*
+ Fungsi untuk mendapatkan informasi mengenai username yang dijadikan parameter
+ mengenai apakah player tersebut terkena portal atau tidak
+*/
 {
     int idx = getPlayerIdx(P, uName);
     if (idx != IdxUndef)
@@ -69,6 +88,10 @@ boolean isPlayerTeleported(Player P, char *uName)
 }
 
 boolean isPlayerImmune(Player P, char *uName)
+/*
+ Fungsi untuk mendapatkan informasi mengenai username yang dijadikan parameter
+ mengenai apakah player tersebut sedang imun atau tidak
+*/
 {
     int idx = getPlayerIdx(P, uName);
     if (idx != IdxUndef)
@@ -78,6 +101,10 @@ boolean isPlayerImmune(Player P, char *uName)
 }
 
 boolean isPlayerSenterPembesar(Player P, char *uName)
+/*
+ Fungsi untuk mendapatkan informasi mengenai username yang dijadikan parameter
+ mengenai apakah player tersebut memakai senter pembesar atau tidak
+*/
 {
     int idx = getPlayerIdx(P, uName);
     if (idx != IdxUndef)
@@ -87,6 +114,10 @@ boolean isPlayerSenterPembesar(Player P, char *uName)
 }
 
 boolean isPlayerSenterPengecil(Player P, char *uName)
+/*
+ Fungsi untuk mendapatkan informasi mengenai username yang dijadikan parameter
+ mengenai apakah player tersebut memakai senter pengecil atau tidak
+*/
 {
     int idx = getPlayerIdx(P, uName);
     if (idx != IdxUndef)
@@ -96,6 +127,10 @@ boolean isPlayerSenterPengecil(Player P, char *uName)
 }
 
 boolean isPlayerCerminPengganda(Player P, char *uName)
+/*
+ Fungsi untuk mendapatkan informasi mengenai username yang dijadikan parameter
+ mengenai apakah player tersebut memakai cermin pengganda atau tidak
+*/
 {
     int idx = getPlayerIdx(P, uName);
     if (idx != IdxUndef)
@@ -105,6 +140,10 @@ boolean isPlayerCerminPengganda(Player P, char *uName)
 }
 
 int getPlayerPosition(Player P, char *uName)
+/*
+ Fungsi untuk mendapatkan informasi mengenai username yang dijadikan parameter
+ mengenai posisi player;
+*/
 {
     int idx = getPlayerIdx(P, uName);
     if (idx != IdxUndef)
@@ -113,30 +152,41 @@ int getPlayerPosition(Player P, char *uName)
     }
 }
 
-void PeringkatPlayer(Player * P) {
-    int temp1[(*P).Neff] ;
-    int temp2[(*P).Neff] ;
-    for (int i = 0; i < (*P).Neff; i++) {
-        temp1[i] = (*P).pos[i + 1] ;
-        temp2[i] = i + 1 ;
+void PeringkatPlayer(Player *P)
+/*
+ Prosedur untuk menuliskan peringkat player berdasarkan posisi
+  I.S. array Player.pos dan Player.uName sembarang
+  F.S. menuliskan peringkat player berdasarkan posisi
+*/
+{
+    int temp1[(*P).Neff];
+    int temp2[(*P).Neff];
+    for (int i = 0; i < (*P).Neff; i++)
+    {
+        temp1[i] = (*P).pos[i + 1];
+        temp2[i] = i + 1;
     }
 
-    int tmp1, tmp2 ;
-    for (int j = (*P).Neff - 1; j >= 0; j--) {
-        for (int k = j; k >= 0; k--) {
-            if (temp1[j] < temp1[k]) {
-                tmp1 = temp1[j] ;
-                temp1[j] = temp1[k] ;
-                temp1[k] = tmp1 ; 
+    int tmp1, tmp2;
+    for (int j = (*P).Neff - 1; j >= 0; j--)
+    {
+        for (int k = j; k >= 0; k--)
+        {
+            if (temp1[j] < temp1[k])
+            {
+                tmp1 = temp1[j];
+                temp1[j] = temp1[k];
+                temp1[k] = tmp1;
 
-                tmp2 = temp2[j] ;
-                temp2[j] = temp2[k] ;
-                temp2[k] = tmp2 ;
+                tmp2 = temp2[j];
+                temp2[j] = temp2[k];
+                temp2[k] = tmp2;
             }
         }
     }
 
-    for (int l = (*P).Neff - 1; l >= 0; l--) {
-        printf("Peringkat %d: %s dengan posisi di petak ke-%d.\n", (*P).Neff - l, (*P).uName[temp2[l]], temp1[l]) ;
+    for (int l = (*P).Neff - 1; l >= 0; l--)
+    {
+        printf("Peringkat %d: %s dengan posisi di petak ke-%d.\n", (*P).Neff - l, (*P).uName[temp2[l]], temp1[l]);
     }
 }
