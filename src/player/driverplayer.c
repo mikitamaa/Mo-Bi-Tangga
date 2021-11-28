@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include ".../player/player.c"
+#include "../player/player.c"
 
 void main()
 {
